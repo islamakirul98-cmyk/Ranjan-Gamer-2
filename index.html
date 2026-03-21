@@ -14,25 +14,27 @@
             margin: 0;
             padding: 20px;
         }
-        .header { margin-top: 20px; margin-bottom: 30px; }
+        .header { margin-top: 10px; margin-bottom: 20px; }
         
-        /* Logo Styling - Neon Effect */
+        /* Logo Styling - Pro Gamer Look */
         .logo { 
             width: 150px; 
+            height: 150px;
             border-radius: 20px; 
             border: 3px solid #ff0050; 
-            box-shadow: 0 0 25px #ff0050;
+            box-shadow: 0 0 30px rgba(255, 0, 80, 0.7);
             background: #000;
+            object-fit: contain;
             margin-bottom: 10px;
         }
 
         .player-box { 
             max-width: 900px; 
             margin: 0 auto; 
-            border: 2px solid rgba(255, 0, 80, 0.5); 
+            border: 2px solid rgba(255, 0, 80, 0.4); 
             border-radius: 15px; 
             overflow: hidden; 
-            box-shadow: 0 0 40px rgba(255, 0, 80, 0.3); 
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1); 
         }
         .video-js { width: 100% !important; height: 500px !important; }
         
@@ -40,13 +42,15 @@
             color: #fff; 
             text-transform: uppercase; 
             letter-spacing: 2px;
-            margin-top: 15px;
-            text-shadow: 0 0 10px #ff0050;
+            margin: 10px 0;
+            text-shadow: 0 0 15px #ff0050;
+            font-size: 32px;
         }
-        .live-tag {
+        .live-status {
             color: #00ff00;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
     </style>
@@ -54,9 +58,9 @@
 <body>
 
     <div class="header">
-        <img src="https://i.ibb.co/v4v8f0D/Ranjan-Gamer-Logo.png" class="logo" alt="Ranjan Gamer Logo">
-        <h1>Ranjan Gamer Live</h1>
-        <div class="live-tag">● LIVE STREAMING</div>
+        <img src="https://i.postimg.cc/856vj6xN/Ranjan-Gamer-Logo.png" class="logo" alt="Ranjan Gamer Logo">
+        <h1>Ranjan Gamer Pro Live</h1>
+        <div class="live-status">● LIVE STREAMING ON</div>
     </div>
 
     <div class="player-box">
@@ -65,8 +69,8 @@
         </video>
     </div>
 
-    <p style="color: #666; margin-top: 25px; font-size: 13px;">
-        Note: Browser setting mein "Insecure Content" Allow karna na bhoolein.
+    <p style="color: #444; margin-top: 30px; font-size: 12px;">
+        Settings Check: Browser setting mein "Insecure Content" <b>Allow</b> karein tabhi video dikhegi.
     </p>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>

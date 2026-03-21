@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranjan Personal IPTV</title>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <style>
+        body { 
+            background-color: #000; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .video-container {
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .video-js {
+            width: 100% !important;
+            height: 500px !important;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+        h2 { margin-bottom: 20px; color: #e91e63; }
+        .status { margin-top: 10px; font-size: 14px; color: #888; }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <h2>📺 My Live Channel</h2>
+        
+        <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
+            <source src="http://116.90.120.151:8000/play/a0hi/index.m3u8" type="application/x-mpegURL">
+        </video>
+
+        <div class="status">Status: Streaming Live...</div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script>
+        var player = videojs('my-video', {
+            autoplay: 'muted', // Browser policy ki wajah se muted autoplay best kaam karta hai
+            fluid: true
+        });
+
+        player.ready(function() {
+            console.log("Player is ready with your personal link.");
+            player.play();
+        });
+
+        // Error handling agar link kaam na kare
+        player.on('error', function() {
+            alert("Bhai, link load nahi ho raha. Check karein ki server online hai ya nahi.");
+        });
+    </script>
+</body>
+</html>

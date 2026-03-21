@@ -3,63 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Personal IPTV</title>
+    <title>Ranjan Gamer Pro IPTV Player v2.0</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        body { 
-            background-color: #000; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            color: white;
-            font-family: Arial, sans-serif;
+        /* Pro Gaming Theme CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0c0e12;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
-        .video-container {
-            width: 90%;
-            max-width: 900px;
+
+        /* --- Header Section (Logo & Text) --- */
+        .main-header {
             text-align: center;
+            margin-bottom: 40px;
+        }
+        .gaming-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 80, 0.7));
+        }
+        .player-title {
+            font-size: 36px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 0, 80, 0.8), 0 0 30px rgba(255, 0, 80, 0.5);
+            margin: 0;
+        }
+        .player-title span { color: #ff0050; }
+
+        /* --- Player Section (Video with Glowing Border) --- */
+        .player-container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #1a1e26;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255, 0, 80, 0.3);
+            position: relative;
         }
         .video-js {
             width: 100% !important;
-            height: 500px !important;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+            height: 560px !important;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255, 0, 80, 0.6);
+            border: 2px solid #333;
         }
-        h2 { margin-bottom: 20px; color: #e91e63; }
-        .status { margin-top: 10px; font-size: 14px; color: #888; }
+
+        /* LIVE indicator overlay */
+        .live-label {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background-color: rgba(255, 0, 80, 0.9);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+        .live-label::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .status-feed {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
-    <div class="video-container">
-        <h2>📺 My Live Channel</h2>
-        
+    <div class="main-header">
+        <img src="https://via.placeholder.com/150x150/ff0050/ffffff?text=RANJAN+GAMER" alt="Ranjan Gamer Logo" class="gaming-logo">
+        <h1 class="player-title">Ranjan <span>Gamer</span> Pro IPTV</h1>
+    </div>
+
+    <div class="player-container">
+        <div class="live-label">LIVE</div>
+
         <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
             <source src="http://116.90.120.151:8000/play/a0hi/index.m3u8" type="application/x-mpegURL">
         </video>
 
-        <div class="status">Status: Streaming Live...</div>
+        <div class="status-feed">Channel: Gaming Feed | Status: Live Streaming...</div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         var player = videojs('my-video', {
-            autoplay: 'muted', // Browser policy ki wajah se muted autoplay best kaam karta hai
-            fluid: true
+            autoplay: 'muted', // Browsers block autoplay with sound, so we start muted
+            fluid: true,
+            playbackRates: [0.5, 1, 1.5, 2],
+            nativeControlsForTouch: true
         });
 
         player.ready(function() {
-            console.log("Player is ready with your personal link.");
             player.play();
+            document.querySelector('.status-feed').innerText = 'Status: Stream is Live. Click speaker to unmute.';
         });
 
-        // Error handling agar link kaam na kare
+        // Simple error handling
         player.on('error', function() {
-            alert("Bhai, link load nahi ho raha. Check karein ki server online hai ya nahi.");
+            alert("Bhai, feed load nahi ho rahi hai. Check karein ki main link online hai ya expire toh nahi hua.");
+            document.querySelector('.status-feed').innerText = 'Status: Error - Stream Offline';
         });
     </script>
 </body>
 </html>
+l

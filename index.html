@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -18,17 +18,17 @@
         .video-box { background: #000; width: 100%; border-bottom: 2px solid var(--border); }
         .video-js { width: 100% !important; max-width: 900px; height: 450px !important; margin: 0 auto; }
 
-        /* 2. REAL IPL SCOREBOARD (JUST BELOW VIDEO) */
+        /* 2. NEW REAL SCOREBOARD (CLEAN LOOK) */
         .score-wrap { padding: 15px; text-align: center; }
-        .real-ipl-card { 
+        .real-card { 
             background: var(--card); border-radius: 12px; overflow: hidden; 
-            border: 1px solid var(--border); max-width: 860px; margin: 0 auto; min-height: 140px;
+            border: 1px solid var(--border); max-width: 860px; margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        /* 3. GLOBAL CHAT BOX (BOTTOM) */
+        /* 3. GLOBAL CHAT BOX */
         .chat-section { padding: 0 15px; max-width: 860px; margin: 20px auto; }
         .chat-title { font-size: 16px; font-weight: bold; color: var(--blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        
         #chat-window { 
             background: var(--card); border: 1px solid var(--border); border-radius: 10px 10px 0 0;
             height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px;
@@ -40,10 +40,7 @@
             display: flex; gap: 5px; background: #1c222a; padding: 10px; 
             border-radius: 0 0 10px 10px; border: 1px solid var(--border); border-top: none;
         }
-        .input-bar input { 
-            flex: 1; background: #0d1117; border: 1px solid #333; color: #fff; padding: 12px; 
-            border-radius: 5px; outline: none; font-size: 14px;
-        }
+        .input-bar input { flex: 1; background: #0d1117; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 5px; outline: none; }
         .send-btn { width: 60px; background: var(--blue); border: none; color: #fff; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
         @media (max-width: 768px) { .video-js { height: 260px !important; } }
@@ -63,10 +60,10 @@
     </div>
 
     <div class="score-wrap">
-        <div class="real-ipl-card">
-            <iframe src="https://www.scorebat.com/embed/livescore/" 
-                    style="width:100%; height:140px; border:none;" 
-                    scrolling="yes"></iframe>
+        <div class="real-card">
+            <iframe src="https://www.cricketstimes.com/get-score-widget" 
+                    style="width:100%; height:135px; border:none;" 
+                    scrolling="no"></iframe>
         </div>
     </div>
 
@@ -76,7 +73,7 @@
             <div class="msg"><span class="user-name">System:</span> Welcome! International fans are joining...</div>
         </div>
         <div class="input-bar">
-            <input type="text" id="my-msg" placeholder="Type your message here...">
+            <input type="text" id="my-msg" placeholder="Type message...">
             <button class="send-btn" onclick="userSend()">➤</button>
         </div>
     </div>
@@ -85,35 +82,24 @@
     <script>
         const player = videojs('rg-player');
 
-        // Random Global Names List
-        const globalUsers = [
-            "Aarav_IND 🇮🇳", "Steve_AUS 🇦🇺", "Joe_ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Babar_Fan_PAK 🇵🇰", 
-            "Faf_RSA 🇿🇦", "Kane_NZ 🇳🇿", "Rashid_AFG 🇦🇫", "Chris_WI 🌴", 
-            "IPL_Lover_Mumbai", "Dhoni_Fan_7", "Kohli_King_18"
-        ];
-        
-        const fakeTexts = [
-            "IPL is the best! 🔥", "What a shot! Incredible.", "Who will win today?", 
-            "Love from India! ❤️", "Miss you ABD!", "Bowling is too good.", 
-            "Big sixer!!! 🏏", "Quality stream, thanks Ranjan Gamer."
-        ];
+        const globalUsers = ["Aarav_IND 🇮🇳", "Steve_AUS 🇦🇺", "Joe_ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Babar_Fan_PAK 🇵🇰", "Faf_RSA 🇿🇦", "Kane_NZ 🇳🇿"];
+        const fakeTexts = ["IPL is the best! 🔥", "What a shot!", "Love from India! ❤️", "Quality stream, thanks Ranjan Gamer."];
 
-        // System Random Chat
+        // Random Global Chat
         setInterval(() => {
-            addMessage(globalUsers[Math.floor(Math.random()*globalUsers.length)], fakeTexts[Math.floor(Math.random()*fakeTexts.length)]);
-        }, 6000);
+            addMsg(globalUsers[Math.floor(Math.random()*globalUsers.length)], fakeTexts[Math.floor(Math.random()*fakeTexts.length)]);
+        }, 7000);
 
-        // User Send with Random Name
         function userSend() {
             const text = document.getElementById('my-msg').value;
             if(text.trim() !== "") {
                 const randomName = globalUsers[Math.floor(Math.random()*globalUsers.length)];
-                addMessage(randomName, text);
+                addMsg(randomName, text);
                 document.getElementById('my-msg').value = "";
             }
         }
 
-        function addMessage(user, text) {
+        function addMsg(user, text) {
             const win = document.getElementById('chat-window');
             const d = document.createElement('div');
             d.className = 'msg';

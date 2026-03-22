@@ -3,133 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer | JioStar Live</title>
+    <title>Ranjan Gamer | Live Cricket</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        :root { --bg: #030b17; --nav: #121921; --blue: #1f80e0; --card-bg: #192133; --live-red: #ff0000; }
-        body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; overflow-x: hidden; }
+        :root { --bg: #ffffff; --google-blue: #1a73e8; --text-main: #202124; --border: #dadce0; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Roboto', sans-serif; margin: 0; }
 
         /* Navbar */
-        .navbar { background: var(--nav); height: 72px; display: flex; align-items: center; padding: 0 4%; position: fixed; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .nav-logo { height: 42px; border-radius: 5px; border: 1px solid var(--blue); margin-right: 20px; }
+        .navbar { background: #fff; height: 65px; display: flex; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        .nav-logo { height: 40px; margin-right: 15px; border-radius: 50%; border: 2px solid var(--google-blue); }
+        .brand-name { font-size: 20px; font-weight: bold; color: var(--google-blue); }
 
-        /* Layout */
-        .main-container { padding-top: 72px; display: flex; flex-wrap: wrap; background: #000; }
-        .player-section { flex: 3; min-width: 350px; }
-        .video-js { width: 100% !important; height: 500px !important; }
+        /* Player Section (Black Background for Video) */
+        .video-container { background: #000; text-align: center; }
+        .video-js { width: 100% !important; max-width: 900px; height: 500px !important; margin: 0 auto; }
 
-        /* --- FAKE CHAT SIDEBAR --- */
-        .chat-section { flex: 1; min-width: 300px; background: #0f171e; height: 500px; border-left: 1px solid #333; display: flex; flex-direction: column; }
-        .chat-header { padding: 15px; background: #1a242f; font-weight: bold; color: var(--blue); border-bottom: 1px solid #333; }
-        .chat-msgs { flex: 1; overflow-y: auto; padding: 12px; font-size: 13px; display: flex; flex-direction: column; gap: 10px; }
-        .m-box { background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; border-left: 3px solid var(--blue); }
-        .u-name { color: #00d2ff; font-weight: bold; margin-right: 5px; }
-
-        /* --- JIOSTAR STYLE SCORECARD --- */
-        .scorecard-bar { background: #1a242f; padding: 15px 4%; border-bottom: 2px solid var(--blue); }
-        .score-row { display: flex; justify-content: space-between; align-items: center; }
-        .team-info { display: flex; align-items: center; gap: 15px; }
-        .team-name { font-size: 24px; font-weight: 900; letter-spacing: 1px; }
-        .live-score { font-size: 28px; font-weight: 900; color: #fff; }
-        .overs { font-size: 14px; color: #888; margin-left: 10px; }
+        /* --- GOOGLE STYLE SCORECARD (Top) --- */
+        .google-card { max-width: 900px; margin: 20px auto; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 6px rgba(32,33,36,0.1); }
+        .card-header { padding: 15px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .live-tag { background: #d93025; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         
-        .batting-stats { margin-top: 15px; display: flex; gap: 30px; font-size: 14px; color: #ccc; border-top: 1px solid #333; padding-top: 10px; }
-        .batsman.active { color: #ffcc00; font-weight: bold; }
-        .batsman.active::after { content: '*'; margin-left: 3px; }
+        .score-box { padding: 20px; display: flex; justify-content: space-around; align-items: center; text-align: center; }
+        .team { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .team img { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); }
+        .team-code { font-size: 22px; font-weight: bold; }
+        .main-score { font-size: 32px; font-weight: bold; }
+        
+        /* Detailed Table Style */
+        .details-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .details-table th { background: #f8f9fa; text-align: left; padding: 10px; border-bottom: 1px solid var(--border); color: #70757a; }
+        .details-table td { padding: 12px 10px; border-bottom: 1px solid #eee; }
+        .striker { color: var(--google-blue); font-weight: bold; }
 
-        .last-balls { display: flex; gap: 8px; align-items: center; margin-top: 15px; }
-        .ball { width: 25px; height: 25px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
-        .ball.four { background: #1f80e0; }
-        .ball.six { background: #6a1b9a; }
-        .ball.wicket { background: #d32f2f; }
+        /* --- COMMENT SECTION (Bottom) --- */
+        .comment-container { max-width: 900px; margin: 30px auto; padding: 0 10px; }
+        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid var(--google-blue); display: inline-block; }
+        .chat-box { background: #f1f3f4; border-radius: 8px; height: 300px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { background: #fff; padding: 10px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .user { font-weight: bold; color: var(--google-blue); margin-right: 8px; }
 
-        .v-count { color: var(--live-red); font-size: 12px; font-weight: bold; display: flex; align-items: center; margin-top: 5px; }
-        .v-dot { height: 6px; width: 6px; background: var(--live-red); border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .view-info { text-align: center; color: #70757a; font-size: 13px; margin: 10px 0; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <img src="1000034992.png" class="nav-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
-        <span style="font-weight:900; color:var(--blue); letter-spacing:1px;">JIOSTAR LIVE</span>
+        <img src="1000034992.png" class="nav-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/150?text=RG'">
+        <span class="brand-name">RANJAN GAMER LIVE</span>
     </nav>
 
-    <div class="main-container">
-        <div class="player-section">
-            <video id="ott-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
-                <source src="https://aps32.playlist.live-video.net/v1/playlist/CvAFOLApXJcOe_ugUzgZ4fnCiJNQGoGq1XYNaR_4q1qcyhWUkWxA7903YIvHyXaSKtjJM3CtvqsiUpJvtVm89Hjn7I9d0q_WTmzyy4rqV58x0s9waMaSPwlkDc-iNbSUbA28yUSeONlCvPPK3naBfpWYtWOtlcv_fuMk9YooB42mWVFCLB0LAToG_MSBynuAUcafAtSspeWUapGZpJF_VAN4wfBxrG3_CGQZOg3CvprqZ44h4Tp9hCL4ku_kTamV4cswGMWKbIRRb3-jqi-gPk16HAf0S6V9LVzz1AixUoH9TFCZPmnIRclc2ZPC-znkr3u_ZX7DWOyR-sPcgamWdpwdTBd4Roxtc42XwI5LNOdopoz0r1PYfvrb-zrfTcRX67kVc1h0kkiFSFRwCiDBWtDZG8W9dCmvqhOW0AQm0IY5ZBY7epxddXKOPpXTI_vWJcI4d2ArLvzXKjIby4842kB77VFbzOSBBCvXV_IYaT1eUIGc95Jwzs-RNgL-wBacpYomt0O-lmL8-XZWi8VXRs8ezF_juUFipysisIisPC1cKk3BNEHNNAHtVpDySRoppO4vZqJHku3qsleM7ph_9iNE481muJyC6bW_RT9q3q18SjLLTYhFVdLDgbBbNrLExBMJ4pjkfqq6UwPfR-_w42Rt_XeMTulP5DD6rVgYzf6bn7D-mb9FvO90kL3ImV6T0Azxn7eM84eagZsJ6tp-vss_Kkclj21DPtIESPy5oSWeZhK6xIsSf3QPA9MEO59PGN0DZW2_0xmTXUuP1Cap6_-VrkOR_paik1znODPmeR57qZCS7rh7NlSJpW20wQWdaxIYBYxi5py-cTkjc_snM4lZxlBwlrU_2WKN94oQ2QWscxZWkqTapQSs6kkXxRKzTkMJ6LpFD7B8Q3tUyYt292Q-PPDVpCMgkWUOIPT9L6m_JAP74ppE-p3FFrO0gCy7pVBe7yDDFm9mdGK1ZKBEMZx23KILr3kPwnqDQiPvh2WQWJkaDBCB6a6RsFNh9OYWVSABKgl1cy13ZXN0LTIw2g4.m3u8" type="application/x-mpegURL">
-            </video>
-        </div>
-
-        <div class="chat-section">
-            <div class="chat-header">COMMENTS</div>
-            <div id="chat-msgs" class="chat-msgs">
-                <div class="m-box"><span class="u-name">Admin:</span> Welcome to Ranjan Gamer Live Scorecard!</div>
-            </div>
-        </div>
+    <div class="video-container">
+        <video id="rg-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
+            <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
+        </video>
     </div>
 
-    <div class="scorecard-bar">
-        <div class="score-row">
-            <div class="team-info">
-                <span class="team-name">IND <span style="font-size:16px; font-weight:normal; color:#888;">vs</span> AUS</span>
-                <span class="live-score" id="main-score">184/3 <span class="overs">(17.4)</span></span>
+    <div class="view-info">🔴 <span id="views">57</span> people watching now</div>
+
+    <div class="google-card">
+        <div class="card-header">
+            <span style="font-weight:bold;">ICC Men's T20 World Cup</span>
+            <span class="live-tag">LIVE</span>
+        </div>
+        
+        <div class="score-box">
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png">
+                <span class="team-code">IND</span>
             </div>
-            <div class="v-count"><span class="v-dot"></span> <span id="views">54</span> Watching</div>
+            <div class="main-score" id="score-text">184/3 (17.4)</div>
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_%28converted%29.svg/1200px-Flag_of_Australia_%28converted%29.svg.png">
+                <span class="team-code">AUS</span>
+            </div>
         </div>
 
-        <div class="batting-stats">
-            <div class="batsman active">V. Kohli: <span id="bat1">74(42)</span></div>
-            <div class="batsman">H. Pandya: <span id="bat2">12(8)</span></div>
-            <div style="margin-left:auto; color:#888;">CRR: 10.41</div>
-        </div>
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Batsman</th>
+                    <th>R</th>
+                    <th>B</th>
+                    <th>4s</th>
+                    <th>6s</th>
+                    <th>SR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="striker">V. Kohli*</td>
+                    <td id="run1">74</td>
+                    <td>42</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>176.2</td>
+                </tr>
+                <tr>
+                    <td>H. Pandya</td>
+                    <td id="run2">12</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>150.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <div class="last-balls" id="recent-balls">
-            <span style="font-size:12px; color:#888; margin-right:5px;">Last 6 balls:</span>
-            <div class="ball">1</div>
-            <div class="ball four">4</div>
-            <div class="ball">0</div>
-            <div class="ball six">6</div>
-            <div class="ball wicket">W</div>
-            <div class="ball">2</div>
+    <div class="comment-container">
+        <div class="section-title">Live Comments</div>
+        <div id="chat-box" class="chat-box">
+            <div class="msg"><span class="user">Ranjan Gamer:</span> Match ka maza lo dosto! Like zaroor karein.</div>
         </div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
-        const player = videojs('ott-player');
+        const player = videojs('rg-player');
 
-        // 1. FAKE LIVE VIEWS (50-60)
+        // Fake Views Update
         setInterval(() => {
-            let v = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
-            document.getElementById('views').innerText = v;
-        }, 4000);
+            document.getElementById('views').innerText = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
+        }, 5000);
 
-        // 2. FAKE CHAT (Sports focused)
-        const u = ["CricketExpert", "Ritesh_Bihar", "StarSports_Fan", "Kohli_G.O.A.T", "Rahul_YT"];
-        const t = ["What a shot by Kohli! 🔥", "India match jitegi pakka", "Love from Bihar ❤️", "Sixer!!! Mast quality hai", "Wicket kab girega?", "Bowling bahut tight hai"];
+        // Fake Score Update (Google Style)
+        let totalRuns = 184;
+        let totalBalls = 106;
+        setInterval(() => {
+            totalRuns += Math.floor(Math.random() * 2);
+            totalBalls++;
+            let ov = Math.floor(totalBalls/6) + "." + (totalBalls%6);
+            document.getElementById('score-text').innerText = totalRuns + "/3 (" + ov + ")";
+            document.getElementById('run1').innerText = totalRuns - 110;
+        }, 8000);
+
+        // Fake Chat (Bottom)
+        const names = ["Aman_Bihar", "CricketLover", "Sunit_Kumar", "Raj_Sports", "Vikash_G"];
+        const cmnts = ["India jitega 🇮🇳", "Kohli is king!", "Mast stream Ranjan bhai", "Scorecard ekdum real hai", "Sixerrrrr!! 🔥"];
         
         setInterval(() => {
-            const cb = document.getElementById('chat-msgs');
+            const cb = document.getElementById('chat-box');
             const d = document.createElement('div');
-            d.className = 'm-box';
-            d.innerHTML = `<span class="u-name">${u[Math.floor(Math.random()*u.length)]}:</span> ${t[Math.floor(Math.random()*t.length)]}`;
+            d.className = 'msg';
+            d.innerHTML = `<span class="user">${names[Math.floor(Math.random()*names.length)]}:</span> ${cmnts[Math.floor(Math.random()*cmnts.length)]}`;
             cb.appendChild(d);
             cb.scrollTop = cb.scrollHeight;
-            if(cb.children.length > 12) cb.removeChild(cb.firstChild);
-        }, 3500);
-
-        // 3. FAKE SCORECARD UPDATE
-        let runs = 184;
-        let balls = 106; // 17.4 overs
-        setInterval(() => {
-            runs += Math.floor(Math.random() * 2); // 0 or 1 run
-            balls++;
-            let overs = Math.floor(balls/6) + "." + (balls%6);
-            document.getElementById('main-score').innerHTML = `${runs}/3 <span class="overs">(${overs})</span>`;
-            document.getElementById('bat1').innerText = (runs - 110) + "(45)";
-        }, 8000);
+            if(cb.children.length > 8) cb.removeChild(cb.firstChild);
+        }, 4000);
     </script>
 </body>
 </html>

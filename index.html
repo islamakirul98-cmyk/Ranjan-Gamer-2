@@ -3,81 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER | REAL LIVE SCORE</title>
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <title>Login | Ranjan Gamer</title>
     <style>
-        :root { --bg: #05080b; --card: #11171e; --accent: #ff0050; --blue: #00d2ff; --border: #1f262e; }
-        body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; }
+        :root { --bg: #030b17; --blue: #1f80e0; --input-bg: #121921; }
+        body { 
+            background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; 
+            margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh;
+        }
 
-        /* NAVBAR */
-        .navbar { background: #0d1117; height: 65px; display: flex; align-items: center; padding: 0 4%; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
-        .nav-logo { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--accent); margin-right: 12px; }
-        .nav-brand { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        .login-box {
+            width: 100%; max-width: 380px; padding: 40px 25px;
+            text-align: center; background: rgba(255,255,255,0.01);
+        }
 
-        /* --- REAL SCORECARD (TOP) --- */
-        .score-section { padding: 10px; background: var(--bg); min-height: 150px; }
-        #cricket-score-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        /* Star Logo Branding */
+        .logo-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--blue); margin-bottom: 25px; box-shadow: 0 0 15px rgba(31,128,224,0.4); }
+        
+        h2 { font-size: 22px; margin-bottom: 8px; font-weight: 500; }
+        p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 35px; }
 
-        /* PLAYER SECTION (MIDDLE) */
-        .video-container { background: #000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 5px; }
-        .video-js { width: 100% !important; max-width: 950px; height: 450px !important; margin: 0 auto; }
+        /* Mobile Input Area */
+        .input-container { position: relative; margin-bottom: 25px; }
+        .country-code { 
+            position: absolute; left: 0; top: 12px; font-size: 18px; 
+            font-weight: bold; color: #fff; border-right: 1px solid #333; padding-right: 10px;
+        }
+        input[type="tel"] {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 2px solid #333; color: #fff; font-size: 20px;
+            padding: 12px 5px 12px 55px; outline: none; box-sizing: border-box;
+            transition: 0.3s; letter-spacing: 1px;
+        }
+        input[type="tel"]:focus { border-bottom-color: var(--blue); }
 
-        /* COMMENTS SECTION (BOTTOM) */
-        .comment-area { padding: 25px 5%; }
-        .comment-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: var(--blue); border-left: 5px solid var(--blue); padding-left: 12px; }
-        .chat-box { background: var(--card); border-radius: 12px; height: 250px; overflow-y: auto; padding: 15px; border: 1px solid var(--border); }
-        .msg { background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid var(--accent); }
-        .user { font-weight: bold; color: var(--blue); font-size: 13px; }
-        .text { font-size: 13px; color: #e6edf3; margin-left: 5px; }
+        /* OTP Screen (Hidden by Default) */
+        #otp-section { display: none; }
+        .otp-wrapper { display: flex; justify-content: space-between; margin: 20px 0; }
+        .otp-input { 
+            width: 50px; height: 50px; background: var(--input-bg); border: 1px solid #333; 
+            border-radius: 8px; text-align: center; color: #fff; font-size: 22px; outline: none;
+        }
+        .otp-input:focus { border-color: var(--blue); }
 
-        @media (max-width: 768px) { .video-js { height: 260px !important; } }
+        .action-btn {
+            width: 100%; background: var(--blue); color: white; border: none; 
+            padding: 16px; border-radius: 8px; font-size: 16px; font-weight: bold; 
+            cursor: pointer; text-transform: uppercase; margin-top: 10px;
+            transition: 0.3s;
+        }
+        .action-btn:hover { background: #1159a1; }
+
+        .footer-text { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 30px; line-height: 1.5; }
+        .link { color: var(--blue); text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <img src="1000035171.jpg" class="nav-logo" alt="RG" onerror="this.src='https://via.placeholder.com/150?text=RG'">
-        <span class="nav-brand">RANJAN <span style="color:var(--accent)">GAMER</span></span>
-    </nav>
-
-    <div class="score-section">
-        <div id="cricket-score-container">
-            <iframe src="https://www.scorebat.com/embed/livescore/" 
-                    style="width:100%; height:150px; border:none;" 
-                    scrolling="yes" class="_scorebatEmbeddedPlayer_"></iframe>
-        </div>
-    </div>
-
-    <div class="video-container">
-        <video id="rg-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto">
-            <source src="http://116.90.120.151:8000/play/a0je/index.m3u8" type="application/x-mpegURL">
-        </video>
-    </div>
-
-    <div class="comment-area">
-        <div class="comment-title">Live Match Chat</div>
-        <div id="chat-msgs" class="chat-box">
-            <div class="msg"><span class="user">System:</span> Real Scoreboard loading... Enjoy!</div>
-        </div>
-    </div>
-
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
-    <script>
-        const player = videojs('rg-player');
-
-        // Fake Chat (Taaki website khali na lage)
-        const users = ["Bihar_Boy", "Cricket_Guru", "Ranjan_Fan_1", "Saurav_Sports"];
-        const texts = ["India match jitegi 🇮🇳", "Ranjan bhai scoreboard mast chal raha hai", "Love from Bihar ❤️", "Sixer!!! 🔥"];
+    <div class="login-box">
+        <img src="1000035171.jpg" class="logo-img" alt="RG Logo" onerror="this.src='https://via.placeholder.com/150?text=RG'">
         
-        setInterval(() => {
-            const cb = document.getElementById('chat-msgs');
-            const d = document.createElement('div');
-            d.className = 'msg';
-            d.innerHTML = `<span class="user">${users[Math.floor(Math.random()*users.length)]}:</span> <span class="text">${texts[Math.floor(Math.random()*texts.length)]}</span>`;
-            cb.appendChild(d);
-            cb.scrollTop = cb.scrollHeight;
-            if(cb.children.length > 8) cb.removeChild(cb.firstChild);
-        }, 4000);
+        <div id="login-section">
+            <h2>Login to Ranjan Gamer</h2>
+            <p>Start watching where you left off</p>
+            
+            <div class="input-container">
+                <span class="country-code">+91</span>
+                <input type="tel" id="phone" placeholder="Enter mobile number" maxlength="10" autocomplete="off">
+            </div>
+            
+            <button class="action-btn" onclick="goToOTP()">Get OTP</button>
+        </div>
+
+        <div id="otp-section">
+            <h2>Verify OTP</h2>
+            <p id="otp-msg">OTP sent to your number</p>
+            
+            <div class="otp-wrapper">
+                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 1)">
+                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 2)">
+                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 3)">
+                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 4)">
+            </div>
+            
+            <button class="action-btn" onclick="finishLogin()">Login</button>
+            <p style="font-size: 13px; margin-top: 20px;">Haven't received it? <span class="link" style="cursor:pointer">Resend OTP</span></p>
+        </div>
+
+        <p class="footer-text">
+            By proceeding, you agree to the <a href="#" class="link">Terms of Use</a> <br> and <a href="#" class="link">Privacy Policy</a>
+        </p>
+    </div>
+
+    <script>
+        function goToOTP() {
+            const num = document.getElementById('phone').value;
+            if(num.length === 10) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('otp-section').style.display = 'block';
+                document.getElementById('otp-msg').innerText = "OTP sent to +91 " + num;
+            } else {
+                alert("Bhai, 10 digit ka number daalo!");
+            }
+        }
+
+        // Auto move to next box in OTP
+        function moveNext(curr, index) {
+            if (curr.value.length === 1) {
+                const next = document.querySelectorAll('.otp-input')[index];
+                if (next) next.focus();
+            }
+        }
+
+        function finishLogin() {
+            alert("Login Successful!");
+            window.location.href = "index.html"; // Ye aapke main page par bhej dega
+        }
     </script>
 </body>
 </html>

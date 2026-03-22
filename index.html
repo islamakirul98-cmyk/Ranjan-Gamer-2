@@ -12,17 +12,18 @@
         /* NAVBAR */
         .navbar { background: #fff; height: 70px; display: flex; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
         
-        /* Fixed Star Logo Path */
+        /* Direct Raw Link from your GitHub to bypass Cache */
         .star-logo {
             width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--google-blue); margin-right: 12px; object-fit: cover;
+            content: url('https://raw.githubusercontent.com/islamakiru198-cmyk/Ranjan-Gamer-2/main/1000035171.jpg');
         }
-        .brand { font-size: 22px; font-weight: bold; color: var(--google-blue); text-transform: uppercase; }
+        .brand { font-size: 22px; font-weight: bold; color: var(--google-blue); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* PLAYER */
+        /* PLAYER AREA */
         .video-box { background: #000; text-align: center; }
         .video-js { width: 100% !important; max-width: 900px; height: 500px !important; margin: 0 auto; }
 
-        /* GOOGLE STYLE SCORECARD (Top Section) */
+        /* GOOGLE STYLE SCORECARD */
         .score-card { max-width: 900px; margin: 20px auto; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
         .match-header { padding: 12px 20px; background: #f8f9fa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: bold; }
         .live-btn { background: #d93025; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
@@ -35,7 +36,7 @@
         .batsman-table th { text-align: left; padding: 10px; background: #f1f3f4; font-size: 13px; color: #5f6368; }
         .batsman-table td { padding: 12px 10px; border-top: 1px solid #eee; font-size: 14px; }
 
-        /* COMMENTS (Bottom Section) */
+        /* LIVE CHAT */
         .chat-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
         .chat-box { background: #f1f3f4; border-radius: 10px; height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); }
         .msg { background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
@@ -47,7 +48,7 @@
 <body>
 
     <nav class="navbar">
-        <img src="1000035171.jpg" class="star-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/150?text=RG'">
+        <img class="star-logo" alt="Ranjan Gamer">
         <span class="brand">RANJAN GAMER</span>
     </nav>
 
@@ -60,7 +61,7 @@
     <div class="v-info">🔴 <span id="v-count">56</span> Watching Now</div>
 
     <div class="score-card">
-        <div class="match-header"><span>India vs Australia - Live Match</span> <span class="live-btn">LIVE</span></div>
+        <div class="match-header"><span>IND vs AUS - T20 World Cup</span> <span class="live-btn">LIVE</span></div>
         <div class="score-main">
             <div style="text-align:center;"><img src="https://flagcdn.com/w80/in.png" class="team-flag"><br><b>IND</b></div>
             <div class="score-num" id="live-run">184/3 (17.4)</div>
@@ -76,7 +77,7 @@
     </div>
 
     <div class="chat-container">
-        <h3 style="border-left: 5px solid var(--google-blue); padding-left: 12px; margin-bottom: 15px;">Live Fan Chat</h3>
+        <h3 style="border-left: 5px solid var(--google-blue); padding-left: 12px; margin-bottom: 15px;">Fan Chat</h3>
         <div id="chat-msgs" class="chat-box"></div>
     </div>
 
@@ -84,12 +85,12 @@
     <script>
         const player = videojs('rg-stream');
 
-        // Fake View Counter
+        // Views Counter
         setInterval(() => {
             document.getElementById('v-count').innerText = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
         }, 4000);
 
-        // Score Update Logic
+        // Score Update
         let r = 184, b = 106;
         setInterval(() => {
             r += Math.floor(Math.random() * 2); b++;
@@ -98,9 +99,9 @@
             document.getElementById('r1').innerText = r - 110;
         }, 8000);
 
-        // Fake Sports Chat (Niche)
-        const users = ["Cricket_Fan", "Ritesh_Bihar", "Saurav_YT", "MatchDay", "SportsLover"];
-        const texts = ["India match jitegi pakka 🇮🇳", "Ranjan bhai stream ki quality mast hai", "Love from Bihar ❤️", "Kohli is King! 👑", "Kya match chal raha hai 🔥"];
+        // Chat
+        const users = ["Cricket_Fan", "Ritesh_Bihar", "Saurav_YT", "MatchDay"];
+        const texts = ["India match jitegi pakka 🇮🇳", "Ranjan bhai mast quality hai", "Love from Bihar ❤️", "Kohli is King! 👑"];
         setInterval(() => {
             const cb = document.getElementById('chat-msgs');
             const d = document.createElement('div'); d.className = 'msg';

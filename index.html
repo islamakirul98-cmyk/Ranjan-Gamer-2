@@ -6,108 +6,96 @@
     <title>RANJAN GAMER LIVE</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        :root { --google-blue: #1a73e8; --border: #dadce0; --bg: #ffffff; }
-        body { background: var(--bg); color: #202124; font-family: 'Roboto', sans-serif; margin: 0; }
+        body { background: #05070a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; }
 
-        /* NAVBAR */
-        .navbar { background: #fff; height: 70px; display: flex; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-        
-        /* Direct Raw Link from your GitHub to bypass Cache */
-        .star-logo {
-            width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--google-blue); margin-right: 12px; object-fit: cover;
-            content: url('https://raw.githubusercontent.com/islamakiru198-cmyk/Ranjan-Gamer-2/main/1000035171.jpg');
+        /* HEADER & BIG STAR LOGO */
+        .header { 
+            width: 100%; padding: 40px 0; 
+            background: linear-gradient(to bottom, #1a0208, #05070a);
+            text-align: center; border-bottom: 2px solid #ff0050;
         }
-        .brand { font-size: 22px; font-weight: bold; color: var(--google-blue); text-transform: uppercase; letter-spacing: 1px; }
+        .star-logo {
+            width: 180px; height: 180px;
+            filter: drop-shadow(0 0 20px #ff0050);
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px #ff0050); }
+            to { filter: drop-shadow(0 0 30px #ff0050); }
+        }
 
         /* PLAYER AREA */
-        .video-box { background: #000; text-align: center; }
-        .video-js { width: 100% !important; max-width: 900px; height: 500px !important; margin: 0 auto; }
+        .main-content { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .video-box { 
+            background: #000; border-radius: 15px; overflow: hidden; 
+            border: 2px solid #333; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .video-js { width: 100% !important; height: 500px !important; }
 
-        /* GOOGLE STYLE SCORECARD */
-        .score-card { max-width: 900px; margin: 20px auto; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
-        .match-header { padding: 12px 20px; background: #f8f9fa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: bold; }
-        .live-btn { background: #d93025; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
-        
-        .score-main { padding: 25px; display: flex; justify-content: space-around; align-items: center; }
-        .score-num { font-size: 36px; font-weight: bold; }
-        .team-flag { width: 55px; height: 38px; border: 1px solid #ddd; object-fit: cover; }
+        /* LIVE VIEWS BAR */
+        .info-bar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 5px; border-bottom: 1px solid #222;
+        }
+        .live-tag { background: #ff0050; color: white; padding: 3px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; margin-right: 10px; }
+        .views { color: #888; font-size: 14px; font-weight: bold; }
 
-        .batsman-table { width: 100%; border-collapse: collapse; }
-        .batsman-table th { text-align: left; padding: 10px; background: #f1f3f4; font-size: 13px; color: #5f6368; }
-        .batsman-table td { padding: 12px 10px; border-top: 1px solid #eee; font-size: 14px; }
-
-        /* LIVE CHAT */
-        .chat-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
-        .chat-box { background: #f1f3f4; border-radius: 10px; height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); }
-        .msg { background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
-        .user { font-weight: bold; color: var(--google-blue); }
-        
-        .v-info { text-align: center; color: #70757a; font-size: 13px; margin: 10px 0; font-weight: bold; }
+        /* SPORTS CHAT (NICHE) */
+        .chat-container { margin-top: 20px; background: #0f1217; border-radius: 12px; border: 1px solid #1f232b; }
+        .chat-head { padding: 15px; border-bottom: 1px solid #1f232b; color: #ff0050; font-weight: bold; }
+        .chat-box { height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+        .msg { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border-left: 3px solid #ff0050; }
+        .user { color: #00d2ff; font-weight: bold; margin-right: 8px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <img class="star-logo" alt="Ranjan Gamer">
-        <span class="brand">RANJAN GAMER</span>
-    </nav>
-
-    <div class="video-box">
-        <video id="rg-stream" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
-            <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
-        </video>
+    <div class="header">
+        <img src="17741693376793666156839165925370.png" class="star-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/180?text=RANJAN+GAMER'">
+        <h1 style="margin-top:20px; letter-spacing:3px; text-transform:uppercase; font-size:28px;">Ranjan <span style="color:#ff0050">Gamer</span></h1>
     </div>
 
-    <div class="v-info">🔴 <span id="v-count">56</span> Watching Now</div>
-
-    <div class="score-card">
-        <div class="match-header"><span>IND vs AUS - T20 World Cup</span> <span class="live-btn">LIVE</span></div>
-        <div class="score-main">
-            <div style="text-align:center;"><img src="https://flagcdn.com/w80/in.png" class="team-flag"><br><b>IND</b></div>
-            <div class="score-num" id="live-run">184/3 (17.4)</div>
-            <div style="text-align:center;"><img src="https://flagcdn.com/w80/au.png" class="team-flag"><br><b>AUS</b></div>
+    <div class="main-content">
+        <div class="video-box">
+            <video id="rg-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
+                <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
+            </video>
         </div>
-        <table class="batsman-table">
-            <thead><tr><th>Batsman</th><th>R</th><th>B</th><th>4s</th><th>6s</th></tr></thead>
-            <tbody>
-                <tr><td style="color:var(--google-blue); font-weight:bold;">V. Kohli*</td><td id="r1">74</td><td>42</td><td>6</td><td>3</td></tr>
-                <tr><td>H. Pandya</td><td>12</td><td>8</td><td>1</td><td>1</td></tr>
-            </tbody>
-        </table>
-    </div>
 
-    <div class="chat-container">
-        <h3 style="border-left: 5px solid var(--google-blue); padding-left: 12px; margin-bottom: 15px;">Fan Chat</h3>
-        <div id="chat-msgs" class="chat-box"></div>
+        <div class="info-bar">
+            <div><span class="live-tag">LIVE</span> <span style="font-weight:bold;">Sports Main Feed</span></div>
+            <div class="views">🔴 <span id="v-count">58</span> watching now</div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-head">LIVE SPORTS CHAT</div>
+            <div id="chat-msgs" class="chat-box">
+                <div class="msg"><span class="user">Admin:</span> Welcome to Ranjan Gamer Live! Enjoy the match.</div>
+            </div>
+        </div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
-        const player = videojs('rg-stream');
+        const player = videojs('rg-player');
 
-        // Views Counter
+        // Fake Views (50-60)
         setInterval(() => {
             document.getElementById('v-count').innerText = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
-        }, 4000);
+        }, 5000);
 
-        // Score Update
-        let r = 184, b = 106;
-        setInterval(() => {
-            r += Math.floor(Math.random() * 2); b++;
-            let ov = Math.floor(b/6) + "." + (b%6);
-            document.getElementById('live-run').innerText = r + "/3 (" + ov + ")";
-            document.getElementById('r1').innerText = r - 110;
-        }, 8000);
-
-        // Chat
-        const users = ["Cricket_Fan", "Ritesh_Bihar", "Saurav_YT", "MatchDay"];
-        const texts = ["India match jitegi pakka 🇮🇳", "Ranjan bhai mast quality hai", "Love from Bihar ❤️", "Kohli is King! 👑"];
+        // Fake Sports Chat Logic
+        const users = ["Cricket_Fan", "Ritesh_Bihar", "Saurav_Sports", "Kohli_Fan", "Bihar_Boy"];
+        const texts = ["India match jitegi pakka 🇮🇳", "Ranjan bhai mast quality hai", "Love from Bihar ❤️", "Sixer!!! 🔥", "Kya bowling ho rahi hai"];
+        
         setInterval(() => {
             const cb = document.getElementById('chat-msgs');
-            const d = document.createElement('div'); d.className = 'msg';
+            const d = document.createElement('div');
+            d.className = 'msg';
             d.innerHTML = `<span class="user">${users[Math.floor(Math.random()*users.length)]}:</span> ${texts[Math.floor(Math.random()*texts.length)]}`;
-            cb.appendChild(d); cb.scrollTop = cb.scrollHeight;
-            if(cb.children.length > 8) cb.removeChild(cb.firstChild);
+            cb.appendChild(d);
+            cb.scrollTop = cb.scrollHeight;
+            if(cb.children.length > 10) cb.removeChild(cb.firstChild);
         }, 4000);
     </script>
 </body>

@@ -3,128 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER | MULTI-LIVE</title>
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <title>RANJAN GAMER | LIVE EVENTS</title>
     <style>
-        :root { --bg: #05080b; --accent: #ff0050; --blue: #00d2ff; --border: #1f262e; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; height: 100%; overflow: hidden; }
+        :root { --bg: #0b0f13; --card-bg: #161b22; --accent: #00ff88; --text: #ffffff; --border: #1f262e; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 70px; }
 
-        /* Scroll Container */
-        .main-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory; /* Scroll karne pe auto-fit hoga */
+        /* HEADER */
+        .header { background: #12171d; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .header h1 { font-size: 18px; margin: 0; letter-spacing: 1px; }
+        .update-bar { background: rgba(0, 255, 136, 0.1); color: var(--accent); padding: 8px; font-size: 12px; text-align: center; border: 1px dashed var(--accent); margin: 10px; border-radius: 5px; }
+
+        /* MATCH LIST STYLE */
+        .container { padding: 10px; }
+        .match-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+            margin-bottom: 15px; padding: 15px; position: relative; cursor: pointer;
+            transition: 0.3s;
         }
-
-        /* Each Video Slide */
-        .video-slide {
-            height: 100vh;
-            width: 100%;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .navbar { background: rgba(13, 17, 23, 0.8); height: 50px; display: flex; align-items: center; padding: 0 15px; position: absolute; width: 100%; z-index: 10; }
-        .nav-logo { height: 35px; width: 35px; border-radius: 50%; border: 2px solid var(--accent); margin-right: 10px; }
-        .nav-brand { font-size: 16px; font-weight: 900; }
-
-        /* Player Box */
-        .player-wrapper { flex: 1; background: #000; display: flex; align-items: center; justify-content: center; }
-        .video-js { width: 100% !important; height: 100% !important; }
-
-        /* UI Overlays (Score & Chat) */
-        .overlay-ui { position: absolute; bottom: 20px; left: 10px; right: 10px; z-index: 5; pointer-events: none; }
-        .score-mini { background: rgba(17, 23, 30, 0.9); padding: 10px; border-radius: 8px; border-left: 4px solid var(--accent); margin-bottom: 10px; pointer-events: auto; }
-        .chat-mini { height: 120px; overflow: hidden; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 8px; font-size: 12px; pointer-events: auto; }
+        .match-card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .league-name { font-size: 11px; color: #8b949e; text-align: center; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; }
         
-        .msg { margin-bottom: 5px; animation: fadeIn 0.3s ease; }
-        .u-name { color: var(--blue); font-weight: bold; }
-        
-        .scroll-hint { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--blue); animation: bounce 2s infinite; font-size: 20px; }
+        .teams-row { display: flex; justify-content: space-between; align-items: center; }
+        .team { text-align: center; width: 30%; }
+        .team img { width: 45px; height: 45px; border-radius: 50%; background: #fff; padding: 2px; }
+        .team-name { font-size: 13px; margin-top: 8px; font-weight: 500; }
 
-        @keyframes bounce { 0%, 100% {transform: translateY(-50%);} 50% {transform: translateY(-30%);} }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        .match-details { text-align: center; width: 40%; }
+        .time { font-size: 16px; font-weight: bold; color: var(--accent); }
+        .date { font-size: 11px; color: #8b949e; margin-top: 4px; }
+        .sport-type { background: #21262d; padding: 2px 10px; border-radius: 10px; font-size: 10px; display: inline-block; margin-top: 8px; }
+
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #12171d; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border); }
+        .nav-item { text-align: center; color: #8b949e; font-size: 11px; cursor: pointer; }
+        .nav-item.active { color: var(--accent); }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+
     </style>
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="header">
+        <span style="font-size: 20px;">☰</span>
+        <h1>RANJAN GAMER TV</h1>
+        <span style="font-size: 20px;">🔍</span>
+    </div>
+
+    <div class="update-bar">
+        Welcome to Ranjan Gamer v4.5 • Watch Live Sports Here!
+    </div>
+
+    <div class="container">
         
-        <div class="video-slide">
-            <nav class="navbar">
-                <img src="17741693376793666156839165925370.png" class="nav-logo">
-                <span class="nav-brand">RG LIVE <span style="color:var(--accent)">MATCH 1</span></span>
-            </nav>
-            <div class="player-wrapper">
-                <video id="player1" class="video-js vjs-default-skin" controls preload="auto" muted>
-                    <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
-                </video>
-            </div>
-            <div class="scroll-hint">↑<br>↓</div>
-            <div class="overlay-ui">
-                <div class="score-mini">🔴 LIVE Score: NZ 252/4 (80.1 ov)</div>
-                <div class="chat-mini" id="chat1"></div>
+        <div class="match-card" onclick="location.href='player.html?ch=1'">
+            <div class="league-name">International Friendly</div>
+            <div class="teams-row">
+                <div class="team">
+                    <img src="https://flagcdn.com/w80/in.png">
+                    <div class="team-name">India</div>
+                </div>
+                <div class="match-details">
+                    <div class="time">07:30 PM</div>
+                    <div class="date">22/03/2026</div>
+                    <div class="sport-type">Football</div>
+                </div>
+                <div class="team">
+                    <img src="https://flagcdn.com/w80/my.png">
+                    <div class="team-name">Malaysia</div>
+                </div>
             </div>
         </div>
 
-        <div class="video-slide">
-            <nav class="navbar">
-                <img src="17741693376793666156839165925370.png" class="nav-logo">
-                <span class="nav-brand">RG LIVE <span style="color:var(--accent)">MATCH 2</span></span>
-            </nav>
-            <div class="player-wrapper">
-                <video id="player2" class="video-js vjs-default-skin" controls preload="auto" muted>
-                    <source src="https://xlbor37ydvaj-hls-live.wmncdn.net/firstindianewstv1/live.stream/index.m3u8" type="application/x-mpegURL">
-                </video>
+        <div class="match-card" onclick="location.href='player.html?ch=2'">
+            <div class="league-name">ICC Champions Trophy</div>
+            <div class="teams-row">
+                <div class="team">
+                    <img src="https://flagcdn.com/w80/nz.png">
+                    <div class="team-name">New Zealand</div>
+                </div>
+                <div class="match-details">
+                    <div class="time">03:40 PM</div>
+                    <div class="date">LIVE</div>
+                    <div class="sport-type">Cricket</div>
+                </div>
+                <div class="team">
+                    <img src="https://flagcdn.com/w80/za.png">
+                    <div class="team-name">South Africa</div>
+                </div>
             </div>
-            <div class="overlay-ui">
-                <div class="score-mini">🔵 Live Stream: First India News</div>
-                <div class="chat-mini" id="chat2"></div>
+        </div>
+
+        <div class="match-card" onclick="location.href='player.html?ch=3'">
+            <div class="league-name">IPL 2026</div>
+            <div class="teams-row">
+                <div class="team">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/2/2b/Mumbai_Indians_Logo.svg">
+                    <div class="team-name">MI</div>
+                </div>
+                <div class="match-details">
+                    <div class="time">08:00 PM</div>
+                    <div class="date">Coming Soon</div>
+                    <div class="sport-type">Cricket</div>
+                </div>
+                <div class="team">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_Logo.svg">
+                    <div class="team-name">RCB</div>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
-    <script>
-        // Players Initialize
-        const p1 = videojs('player1');
-        const p2 = videojs('player2');
+    <div class="bottom-nav">
+        <div class="nav-item active"><span class="nav-icon">📡</span>Live Events</div>
+        <div class="nav-item"><span class="nav-icon">🏏</span>Sports</div>
+        <div class="nav-item"><span class="nav-icon">📺</span>Categories</div>
+    </div>
 
-        // Fake Chat Script for both
-        const users = ["Ranjan_Fan", "IPL_Expert", "Bihar_Boy"];
-        const texts = ["Maza aa gaya bhai!", "Quality ekdum HD hai", "Thanks for the link"];
-
-        function autoChat(chatId) {
-            setInterval(() => {
-                const win = document.getElementById(chatId);
-                const d = document.createElement('div');
-                d.className = 'msg';
-                d.innerHTML = `<span class="u-name">${users[Math.floor(Math.random()*3)]}:</span> ${texts[Math.floor(Math.random()*3)]}`;
-                win.appendChild(d);
-                win.scrollTop = win.scrollHeight;
-                if(win.children.length > 5) win.removeChild(win.firstChild);
-            }, 5000);
-        }
-
-        autoChat('chat1');
-        autoChat('chat2');
-
-        // Auto play/pause logic on scroll
-        const container = document.querySelector('.main-container');
-        container.addEventListener('scroll', () => {
-            const scrollPos = container.scrollTop;
-            const windowHeight = window.innerHeight;
-
-            if (scrollPos < windowHeight / 2) {
-                p1.play(); p2.pause();
-            } else {
-                p1.pause(); p2.play();
-            }
-        });
-    </script>
 </body>
 </html>

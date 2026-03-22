@@ -3,86 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER PRO OTT V3.0</title>
+    <title>Ranjan Gamer | Hotstar Clone</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        body { background: #0b1119; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        
-        /* HEADER BANNER */
-        .hero { 
-            width: 100%; padding: 40px 0; 
-            background: linear-gradient(180deg, #1a242f 0%, #0b1119 100%);
-            text-align: center; border-bottom: 3px solid #ff0050;
+        :root { --bg: #030b17; --nav: #121921; --blue: #1f80e0; --card-bg: #192133; }
+        body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; overflow-x: hidden; }
+
+        /* --- Hotstar Style Navbar --- */
+        .navbar { 
+            background: var(--nav); height: 72px; display: flex; align-items: center; 
+            padding: 0 4%; position: fixed; width: 100%; z-index: 1000;
         }
+        .nav-logo { height: 40px; margin-right: 30px; border-radius: 4px; border: 1px solid var(--blue); }
+        .nav-items { list-style: none; display: flex; gap: 25px; padding: 0; margin: 0; }
+        .nav-items li { font-weight: 500; font-size: 16px; color: rgba(255,255,255,0.7); cursor: pointer; transition: 0.3s; }
+        .nav-items li:hover { color: #fff; }
+
+        /* --- Video Player Section --- */
+        .main-view { padding-top: 72px; background: #000; width: 100%; position: relative; }
+        .video-js { width: 100% !important; max-width: 1100px; height: 550px !important; margin: 0 auto; }
+        .stream-info { padding: 15px 5%; background: linear-gradient(to bottom, #000, var(--bg)); }
+        .stream-title { font-size: 22px; font-weight: bold; margin: 0; color: #fff; }
+        .stream-desc { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px; }
+
+        /* --- Horizontal Scrolling Rows --- */
+        .content-section { padding: 10px 4% 40px; }
+        .row-title { font-size: 18px; font-weight: 700; margin: 25px 0 15px; color: rgba(255,255,255,0.9); }
         
-        /* === Verified Star Logo (Direct Code - Base64) === */
-        .logo-direct {
-            width: 160px; height: 160px;
-            border-radius: 50%;
-            border: 4px solid #ff0050;
-            box-shadow: 0 0 30px #ff0050;
-            background-color: #000;
-            object-fit: contain;
-            /* Yahan humne text code daala hai */
-            content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+Cjx4bXBNRCB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nIHhtbG5zOmRjPSdodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLycgeG1wOkNyZWF0b3JUb29sPSdBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyknPjxkYzp0aXRsZT48cmRmOkFsdD48cmRmOmxpIHhtbDpsYW5nPSd4LWRlZmF1bHQnPlJBTkpBTiBHQU1FUjwvcmRmOmxpPjwvcmRmOkFsdD48L2RjOnRpdGxlPjwveG1wOk1EPgoc6E0AAAAASUVORK5CYII=');
+        .channel-list { 
+            display: flex; overflow-x: auto; gap: 18px; padding-bottom: 20px; 
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .channel-list::-webkit-scrollbar { display: none; /* Hide scrollbar Chrome */ }
+
+        .chan-card { 
+            min-width: 180px; height: 105px; background: var(--card-bg); 
+            border-radius: 8px; cursor: pointer; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .chan-card:hover { transform: scale(1.15); z-index: 10; border-color: var(--blue); box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+        .chan-card img { width: 100%; height: 100%; object-fit: contain; padding: 12px; background: #fff; border-radius: 8px; }
+        .chan-card p { 
+            position: absolute; bottom: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+            margin: 0; padding: 8px 0; text-align: center; font-size: 13px; font-weight: 500;
         }
 
-        .hero h1 { font-size: 36px; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px #ff0050; }
-
-        /* PLAYER BOX */
-        .player-area { background: #000; padding: 20px; text-align: center; }
-        .video-js { width: 100% !important; max-width: 850px; height: 480px !important; margin: 0 auto; border-radius: 12px; border: 2px solid #333; }
-
-        /* CHANNELS GRID */
-        .grid-container { padding: 30px; }
-        .grid-title { font-size: 22px; font-weight: bold; margin-bottom: 25px; border-left: 5px solid #ff0050; padding-left: 15px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
-        .card { 
-            background: #161e29; border-radius: 10px; overflow: hidden; transition: 0.3s; cursor: pointer; border: 1px solid #252e39;
-        }
-        .card:hover { transform: translateY(-5px); border-color: #ff0050; box-shadow: 0 0 20px rgba(255,0,80,0.6); }
-        .card img { width: 100%; height: 90px; object-fit: contain; background: #fff; padding: 10px; }
-        .card p { padding: 10px; margin: 0; text-align: center; font-size: 14px; font-weight: bold; color: #ccc; }
+        /* LIVE Badge */
+        .live-tag { background: #ff0000; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; position: absolute; top: 8px; left: 8px; }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <img class="logo-direct" alt="Ranjan Gamer Star Logo">
-        <h1>RANJAN GAMER <span style="color:#ff0050">PRO OTT</span></h1>
-    </div>
+    <nav class="navbar">
+        <img src="1000034992.png" class="nav-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
+        <ul class="nav-items">
+            <li>TV</li>
+            <li>Movies</li>
+            <li style="color: #fff; border-bottom: 2px solid var(--blue); padding-bottom: 22px; margin-top: 22px;">Sports</li>
+            <li>Disney+</li>
+            <li style="color: #ffcc00; font-weight: bold;">Kids</li>
+        </ul>
+    </nav>
 
-    <div class="player-area">
-        <video id="main-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
+    <div class="main-view">
+        <video id="h-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
             <source src="http://116.90.120.151:8000/play/a0hi/index.m3u8" type="application/x-mpegURL">
         </video>
-        <p id="now-title" style="margin-top:15px; color:#00d2ff;">Playing: Main Stream</p>
+        <div class="stream-info">
+            <h1 id="playing-title" class="stream-title">Ranjan Gamer Live Stream</h1>
+            <p class="stream-desc">Sports • Hindi • Live • High Definition</p>
+        </div>
     </div>
 
-    <div class="grid-container">
-        <div class="grid-title">LIVE SPORTS CHANNELS</div>
-        <div class="grid">
-            <div class="card" onclick="playChan('http://116.90.120.151:8000/play/a0hi/index.m3u8', 'Main Stream')">
-                <img src="https://via.placeholder.com/150?text=GAME"><p>Main Feed</p>
+    <div class="content-section">
+        <h2 class="row-title">Popular Channels</h2>
+        <div class="channel-list">
+            <div class="chan-card" onclick="playIt('http://116.90.120.151:8000/play/a0hi/index.m3u8', 'Main Feed Live')">
+                <span class="live-tag">LIVE</span>
+                <img src="1000034992.png" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
+                <p>Main Feed</p>
             </div>
-            <div class="card" onclick="playChan('http://103.199.160.85/Out_HLS/Starsports1/index.m3u8', 'Star Sports')">
-                <img src="https://via.placeholder.com/150?text=SPORTS+1"><p>Star Sports</p>
+            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Starsports1/index.m3u8', 'Star Sports 1 HD')">
+                <span class="live-tag">LIVE</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Star_Sports_logo.svg/1200px-Star_Sports_logo.svg.png">
+                <p>Star Sports 1</p>
             </div>
-            <div class="card" onclick="playChan('http://103.199.160.85/Out_HLS/Sonyten1/index.m3u8', 'Sony Ten')">
-                <img src="https://via.placeholder.com/150?text=TEN+1"><p>Sony Ten</p>
+            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Sonyten1/index.m3u8', 'Sony Ten 1 HD')">
+                <span class="live-tag">LIVE</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sony_Ten_logo.png/640px-Sony_Ten_logo.png">
+                <p>Sony Ten 1</p>
             </div>
+            <div class="chan-card" onclick="playIt('https://linear-143.voot.com/eleven/voot_sports_2_hd/index.m3u8', 'Hotstar Sports Special')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_Hotstar_logo.png/640px-Disney%2B_Hotstar_logo.png">
+                <p>Hotstar Live</p>
+            </div>
+            <div class="chan-card">
+                <img src="https://via.placeholder.com/180x105?text=Willow+TV">
+                <p>Willow Cricket</p>
+            </div>
+        </div>
+
+        <h2 class="row-title">Entertainment & News</h2>
+        <div class="channel-list">
+            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=Star+Plus"><p>Star Plus</p></div>
+            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=ABP+News"><p>ABP News</p></div>
+            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=Discovery"><p>Discovery</p></div>
         </div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
-        const player = videojs('main-vid');
-        function playChan(url, name) {
-            player.src({ src: url, type: 'application/x-mpegURL' });
-            player.play();
-            document.getElementById('now-title').innerText = "Playing: " + name;
-            window.scrollTo({top: 300, behavior: 'smooth'});
+        const hPlayer = videojs('h-player');
+        function playIt(url, name) {
+            hPlayer.src({ src: url, type: 'application/x-mpegURL' });
+            hPlayer.play();
+            document.getElementById('playing-title').innerText = name;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>

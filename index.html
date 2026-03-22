@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Ranjan Gamer</title>
     <style>
-        :root { --bg: #030b17; --blue: #1f80e0; --input-bg: #121921; }
+        :root { --bg: #030b17; --blue: #1f80e0; }
         body { 
             background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; 
             margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh;
         }
 
-        .login-box {
+        .login-card {
             width: 100%; max-width: 380px; padding: 40px 25px;
             text-align: center; background: rgba(255,255,255,0.01);
         }
 
-        /* Star Logo Branding */
-        .logo-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--blue); margin-bottom: 25px; box-shadow: 0 0 15px rgba(31,128,224,0.4); }
+        /* Ranjan Gamer Star Logo */
+        .logo-img { 
+            width: 90px; height: 90px; border-radius: 50%; 
+            border: 3px solid var(--blue); margin-bottom: 25px; 
+            box-shadow: 0 0 15px rgba(31,128,224,0.4); 
+        }
         
         h2 { font-size: 22px; margin-bottom: 8px; font-weight: 500; }
         p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 35px; }
@@ -36,15 +40,6 @@
         }
         input[type="tel"]:focus { border-bottom-color: var(--blue); }
 
-        /* OTP Screen (Hidden by Default) */
-        #otp-section { display: none; }
-        .otp-wrapper { display: flex; justify-content: space-between; margin: 20px 0; }
-        .otp-input { 
-            width: 50px; height: 50px; background: var(--input-bg); border: 1px solid #333; 
-            border-radius: 8px; text-align: center; color: #fff; font-size: 22px; outline: none;
-        }
-        .otp-input:focus { border-color: var(--blue); }
-
         .action-btn {
             width: 100%; background: var(--blue); color: white; border: none; 
             padding: 16px; border-radius: 8px; font-size: 16px; font-weight: bold; 
@@ -53,40 +48,25 @@
         }
         .action-btn:hover { background: #1159a1; }
 
-        .footer-text { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 30px; line-height: 1.5; }
+        .footer-text { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 40px; line-height: 1.5; }
         .link { color: var(--blue); text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <div class="login-box">
-        <img src="1000035171.jpg" class="logo-img" alt="RG Logo" onerror="this.src='https://via.placeholder.com/150?text=RG'">
+    <div class="login-card">
+        <img src="17741693376793666156839165925370.png" class="logo-img" alt="RG Logo" onerror="this.src='https://via.placeholder.com/150?text=RG'">
         
-        <div id="login-section">
-            <h2>Login to Ranjan Gamer</h2>
-            <p>Start watching where you left off</p>
+        <div id="login-form">
+            <h2>Login to continue</h2>
+            <p>Enter your mobile number to start watching</p>
             
             <div class="input-container">
                 <span class="country-code">+91</span>
-                <input type="tel" id="phone" placeholder="Enter mobile number" maxlength="10" autocomplete="off">
+                <input type="tel" id="mobileNumber" placeholder="Mobile Number" maxlength="10">
             </div>
             
-            <button class="action-btn" onclick="goToOTP()">Get OTP</button>
-        </div>
-
-        <div id="otp-section">
-            <h2>Verify OTP</h2>
-            <p id="otp-msg">OTP sent to your number</p>
-            
-            <div class="otp-wrapper">
-                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 1)">
-                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 2)">
-                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 3)">
-                <input type="tel" class="otp-input" maxlength="1" onkeyup="moveNext(this, 4)">
-            </div>
-            
-            <button class="action-btn" onclick="finishLogin()">Login</button>
-            <p style="font-size: 13px; margin-top: 20px;">Haven't received it? <span class="link" style="cursor:pointer">Resend OTP</span></p>
+            <button class="action-btn" onclick="directLogin()">Login</button>
         </div>
 
         <p class="footer-text">
@@ -95,28 +75,15 @@
     </div>
 
     <script>
-        function goToOTP() {
-            const num = document.getElementById('phone').value;
+        function directLogin() {
+            const num = document.getElementById('mobileNumber').value;
+
             if(num.length === 10) {
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('otp-section').style.display = 'block';
-                document.getElementById('otp-msg').innerText = "OTP sent to +91 " + num;
+                // Seedhe Redirect - Na OTP, Na Fake Wait
+                window.location.href = "index.html"; 
             } else {
-                alert("Bhai, 10 digit ka number daalo!");
+                alert("Bhai, 10 digit ka sahi mobile number daalo!");
             }
-        }
-
-        // Auto move to next box in OTP
-        function moveNext(curr, index) {
-            if (curr.value.length === 1) {
-                const next = document.querySelectorAll('.otp-input')[index];
-                if (next) next.focus();
-            }
-        }
-
-        function finishLogin() {
-            alert("Login Successful!");
-            window.location.href = "index.html"; // Ye aapke main page par bhej dega
         }
     </script>
 </body>

@@ -9,13 +9,12 @@
         :root { --google-blue: #1a73e8; --border: #dadce0; --bg: #ffffff; }
         body { background: var(--bg); color: #202124; font-family: 'Roboto', sans-serif; margin: 0; }
 
-        /* HEADER & STAR LOGO */
+        /* HEADER */
         .navbar { background: #fff; height: 70px; display: flex; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
         
-        /* Aapka Star Logo - Direct Code Base64 */
+        /* Fixed Logo Style */
         .star-logo {
-            width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--google-blue); margin-right: 12px;
-            content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+Cjx4bXBNRCB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nIHhtbG5zOmRjPSdodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLycgeG1wOkNyZWF0b3JUb29sPSdBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyknPjxkYzp0aXRsZT48cmRmOkFsdD48cmRmOmxpIHhtbDpsYW5nPSd4LWRlZmF1bHQnPlJBTkpBTiBHQU1FUjwvcmRmOmxpPjwvcmRmOkFsdD48L2RjOnRpdGxlPjwveG1wOk1EPgoc6E0AAAAASUVORK5CYII=');
+            width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--google-blue); margin-right: 12px; object-fit: cover;
         }
         .brand { font-size: 22px; font-weight: bold; color: var(--google-blue); }
 
@@ -23,34 +22,30 @@
         .video-box { background: #000; text-align: center; }
         .video-js { width: 100% !important; max-width: 900px; height: 500px !important; margin: 0 auto; }
 
-        /* GOOGLE STYLE SCORECARD (Top Section) */
+        /* SCORECARD (UPAR) */
         .score-card { max-width: 900px; margin: 20px auto; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
         .match-header { padding: 12px 20px; background: #f8f9fa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: bold; }
         .live-btn { background: #d93025; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
         
         .score-main { padding: 25px; display: flex; justify-content: space-around; align-items: center; }
         .score-num { font-size: 36px; font-weight: bold; }
-        .team-flag { width: 60px; height: 40px; border: 1px solid #ddd; object-fit: cover; }
+        .team-flag { width: 50px; height: 35px; border: 1px solid #ddd; object-fit: cover; }
 
         .batsman-table { width: 100%; border-collapse: collapse; }
         .batsman-table th { text-align: left; padding: 10px; background: #f1f3f4; font-size: 13px; color: #5f6368; }
         .batsman-table td { padding: 12px 10px; border-top: 1px solid #eee; font-size: 14px; }
-        .active-bat { color: var(--google-blue); font-weight: bold; }
 
-        /* COMMENTS (Bottom Section) */
+        /* COMMENTS (NICHE) */
         .chat-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
-        .chat-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; border-left: 4px solid var(--google-blue); padding-left: 10px; }
         .chat-box { background: #f1f3f4; border-radius: 10px; height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
         .msg { background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
         .user { font-weight: bold; color: var(--google-blue); }
-
-        .v-info { text-align: center; color: #70757a; font-size: 13px; margin: 10px 0; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <img class="star-logo">
+        <img src="1000034992.png" class="star-logo" alt="Logo" onerror="this.src='https://via.placeholder.com/150?text=RG'">
         <span class="brand">RANJAN GAMER</span>
     </nav>
 
@@ -60,42 +55,31 @@
         </video>
     </div>
 
-    <div class="v-info">🔴 <span id="v-count">56</span> Watching Now</div>
-
     <div class="score-card">
-        <div class="match-header">
-            <span>India vs Australia - T20i</span>
-            <span class="live-btn">LIVE</span>
-        </div>
+        <div class="match-header"><span>India vs Australia</span> <span class="live-btn">LIVE</span></div>
         <div class="score-main">
-            <div style="text-align:center;"><img src="https://flagcdn.com/w80/in.png" class="team-flag"><br><b>IND</b></div>
+            <div><img src="https://flagcdn.com/w80/in.png" class="team-flag"><br><b>IND</b></div>
             <div class="score-num" id="live-run">184/3 (17.4)</div>
-            <div style="text-align:center;"><img src="https://flagcdn.com/w80/au.png" class="team-flag"><br><b>AUS</b></div>
+            <div><img src="https://flagcdn.com/w80/au.png" class="team-flag"><br><b>AUS</b></div>
         </div>
         <table class="batsman-table">
-            <thead><tr><th>Batsman</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr></thead>
+            <thead><tr><th>Batsman</th><th>R</th><th>B</th><th>4s</th><th>6s</th></tr></thead>
             <tbody>
-                <tr><td class="active-bat">V. Kohli*</td><td id="r1">74</td><td>42</td><td>6</td><td>3</td><td>176.2</td></tr>
-                <tr><td>H. Pandya</td><td>12</td><td>8</td><td>1</td><td>1</td><td>150.0</td></tr>
+                <tr><td style="color:var(--google-blue); font-weight:bold;">V. Kohli*</td><td id="r1">74</td><td>42</td><td>6</td><td>3</td></tr>
+                <tr><td>H. Pandya</td><td>12</td><td>8</td><td>1</td><td>1</td></tr>
             </tbody>
         </table>
     </div>
 
     <div class="chat-container">
-        <div class="chat-title">Live Match Chat</div>
+        <h3 style="border-left: 4px solid var(--google-blue); padding-left: 10px;">Live Chat</h3>
         <div id="chat-msgs" class="chat-box"></div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         const player = videojs('rg-stream');
-
-        // Fake View Counter
-        setInterval(() => {
-            document.getElementById('v-count').innerText = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
-        }, 4000);
-
-        // Score Update Logic
+        // Fake Score
         let r = 184, b = 106;
         setInterval(() => {
             r += Math.floor(Math.random() * 2); b++;
@@ -103,16 +87,15 @@
             document.getElementById('live-run').innerText = r + "/3 (" + ov + ")";
             document.getElementById('r1').innerText = r - 110;
         }, 7000);
-
-        // Fake Sports Chat
-        const users = ["CricketFan_Bihar", "Ritesh_Sports", "Saurav_YT", "Anjali_G", "KingKohli_Fan"];
-        const texts = ["India will win! 🇮🇳", "Sixer!! Kya shot hai 🔥", "Love from Bihar ❤️", "Kohli King 👑", "Mast quality hai Ranjan bhai"];
+        // Fake Chat
+        const users = ["Cricket_Fan", "Ritesh_Bihar", "Saurav_YT"];
+        const texts = ["India will win!", "Kya shot hai!", "Love from Bihar ❤️"];
         setInterval(() => {
             const cb = document.getElementById('chat-msgs');
             const d = document.createElement('div'); d.className = 'msg';
             d.innerHTML = `<span class="user">${users[Math.floor(Math.random()*users.length)]}:</span> ${texts[Math.floor(Math.random()*texts.length)]}`;
             cb.appendChild(d); cb.scrollTop = cb.scrollHeight;
-            if(cb.children.length > 8) cb.removeChild(cb.firstChild);
+            if(cb.children.length > 6) cb.removeChild(cb.firstChild);
         }, 4000);
     </script>
 </body>

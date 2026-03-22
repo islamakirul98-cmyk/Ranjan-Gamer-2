@@ -3,53 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer | Hotstar Clone</title>
+    <title>Ranjan Gamer | Live Sports</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         :root { --bg: #030b17; --nav: #121921; --blue: #1f80e0; --card-bg: #192133; }
         body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; overflow-x: hidden; }
 
-        /* --- Hotstar Style Navbar --- */
+        /* Hotstar Navbar */
         .navbar { 
             background: var(--nav); height: 72px; display: flex; align-items: center; 
             padding: 0 4%; position: fixed; width: 100%; z-index: 1000;
         }
-        .nav-logo { height: 40px; margin-right: 30px; border-radius: 4px; border: 1px solid var(--blue); }
+        .nav-logo { height: 42px; margin-right: 30px; border-radius: 5px; border: 1px solid var(--blue); }
         .nav-items { list-style: none; display: flex; gap: 25px; padding: 0; margin: 0; }
-        .nav-items li { font-weight: 500; font-size: 16px; color: rgba(255,255,255,0.7); cursor: pointer; transition: 0.3s; }
-        .nav-items li:hover { color: #fff; }
+        .nav-items li { font-weight: 500; font-size: 16px; color: rgba(255,255,255,0.7); cursor: pointer; }
 
-        /* --- Video Player Section --- */
-        .main-view { padding-top: 72px; background: #000; width: 100%; position: relative; }
-        .video-js { width: 100% !important; max-width: 1100px; height: 550px !important; margin: 0 auto; }
-        .stream-info { padding: 15px 5%; background: linear-gradient(to bottom, #000, var(--bg)); }
-        .stream-title { font-size: 22px; font-weight: bold; margin: 0; color: #fff; }
-        .stream-desc { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px; }
+        /* Player Section */
+        .main-view { padding-top: 72px; background: #000; width: 100%; }
+        .video-js { width: 100% !important; max-width: 1000px; height: 500px !important; margin: 0 auto; }
+        .stream-info { padding: 20px 5%; background: linear-gradient(to bottom, #000, var(--bg)); }
+        .stream-title { font-size: 24px; font-weight: bold; margin: 0; color: #fff; }
 
-        /* --- Horizontal Scrolling Rows --- */
-        .content-section { padding: 10px 4% 40px; }
-        .row-title { font-size: 18px; font-weight: 700; margin: 25px 0 15px; color: rgba(255,255,255,0.9); }
+        /* Horizontal Scrolling Rows */
+        .content-section { padding: 10px 4% 50px; }
+        .row-title { font-size: 19px; font-weight: 700; margin: 25px 0 15px; }
         
-        .channel-list { 
-            display: flex; overflow-x: auto; gap: 18px; padding-bottom: 20px; 
-            scrollbar-width: none; /* Hide scrollbar Firefox */
-        }
-        .channel-list::-webkit-scrollbar { display: none; /* Hide scrollbar Chrome */ }
+        .channel-list { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; scrollbar-width: none; }
+        .channel-list::-webkit-scrollbar { display: none; }
 
         .chan-card { 
-            min-width: 180px; height: 105px; background: var(--card-bg); 
-            border-radius: 8px; cursor: pointer; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative; border: 1px solid rgba(255,255,255,0.05);
+            min-width: 190px; height: 110px; background: var(--card-bg); 
+            border-radius: 8px; cursor: pointer; transition: 0.4s;
+            position: relative; border: 1px solid rgba(255,255,255,0.1);
         }
-        .chan-card:hover { transform: scale(1.15); z-index: 10; border-color: var(--blue); box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+        .chan-card:hover { transform: scale(1.1); border-color: var(--blue); z-index: 5; }
         .chan-card img { width: 100%; height: 100%; object-fit: contain; padding: 12px; background: #fff; border-radius: 8px; }
-        .chan-card p { 
-            position: absolute; bottom: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
-            margin: 0; padding: 8px 0; text-align: center; font-size: 13px; font-weight: 500;
-        }
-
-        /* LIVE Badge */
-        .live-tag { background: #ff0000; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; position: absolute; top: 8px; left: 8px; }
+        .chan-card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.8); margin: 0; padding: 6px 0; text-align: center; font-size: 13px; }
+        
+        .live-badge { background: #ff0000; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; position: absolute; top: 10px; left: 10px; z-index: 2; }
     </style>
 </head>
 <body>
@@ -61,53 +52,35 @@
             <li>Movies</li>
             <li style="color: #fff; border-bottom: 2px solid var(--blue); padding-bottom: 22px; margin-top: 22px;">Sports</li>
             <li>Disney+</li>
-            <li style="color: #ffcc00; font-weight: bold;">Kids</li>
         </ul>
     </nav>
 
     <div class="main-view">
         <video id="h-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
-            <source src="http://116.90.120.151:8000/play/a0hi/index.m3u8" type="application/x-mpegURL">
+            <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
         </video>
         <div class="stream-info">
             <h1 id="playing-title" class="stream-title">Ranjan Gamer Live Stream</h1>
-            <p class="stream-desc">Sports • Hindi • Live • High Definition</p>
+            <p style="color:rgba(255,255,255,0.5); font-size:14px; margin-top:5px;">Live Sports • Hindi • HD</p>
         </div>
     </div>
 
     <div class="content-section">
-        <h2 class="row-title">Popular Channels</h2>
+        <h2 class="row-title">Recommended For You</h2>
         <div class="channel-list">
-            <div class="chan-card" onclick="playIt('http://116.90.120.151:8000/play/a0hi/index.m3u8', 'Main Feed Live')">
-                <span class="live-tag">LIVE</span>
-                <img src="1000034992.png" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
-                <p>Main Feed</p>
+            <div class="chan-card" onclick="playIt('https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8', 'Main Amagi Stream')">
+                <span class="live-badge">LIVE</span>
+                <img src="1000034992.png" onerror="this.src='https://via.placeholder.com/150?text=NEW+FEED'">
+                <p>New Main Feed</p>
             </div>
-            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Starsports1/index.m3u8', 'Star Sports 1 HD')">
-                <span class="live-tag">LIVE</span>
+            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Starsports1/index.m3u8', 'Star Sports 1')">
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Star_Sports_logo.svg/1200px-Star_Sports_logo.svg.png">
                 <p>Star Sports 1</p>
             </div>
-            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Sonyten1/index.m3u8', 'Sony Ten 1 HD')">
-                <span class="live-tag">LIVE</span>
+            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Sonyten1/index.m3u8', 'Sony Ten 1')">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sony_Ten_logo.png/640px-Sony_Ten_logo.png">
                 <p>Sony Ten 1</p>
             </div>
-            <div class="chan-card" onclick="playIt('https://linear-143.voot.com/eleven/voot_sports_2_hd/index.m3u8', 'Hotstar Sports Special')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_Hotstar_logo.png/640px-Disney%2B_Hotstar_logo.png">
-                <p>Hotstar Live</p>
-            </div>
-            <div class="chan-card">
-                <img src="https://via.placeholder.com/180x105?text=Willow+TV">
-                <p>Willow Cricket</p>
-            </div>
-        </div>
-
-        <h2 class="row-title">Entertainment & News</h2>
-        <div class="channel-list">
-            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=Star+Plus"><p>Star Plus</p></div>
-            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=ABP+News"><p>ABP News</p></div>
-            <div class="chan-card"><img src="https://via.placeholder.com/180x105?text=Discovery"><p>Discovery</p></div>
         </div>
     </div>
 

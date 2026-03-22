@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER | ASLI LIVE SCORE</title>
+    <title>RANJAN GAMER | REAL LIVE SCORE</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         :root { --bg: #05080b; --card: #11171e; --accent: #ff0050; --blue: #00d2ff; --border: #1f262e; }
@@ -14,17 +14,9 @@
         .nav-logo { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--accent); margin-right: 12px; }
         .nav-brand { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 1px; }
 
-        /* --- REAL SCORECARD CONTAINER (TOP) --- */
-        .score-container { 
-            padding: 10px; background: var(--bg); 
-            display: flex; justify-content: center;
-        }
-        /* Asli Score Widget Ka Box */
-        .asli-score-box {
-            width: 100%; max-width: 900px; height: 160px; 
-            background: #1a1a1a; border-radius: 12px; 
-            overflow: hidden; border: 1px solid var(--border);
-        }
+        /* --- REAL SCORECARD (TOP) --- */
+        .score-section { padding: 10px; background: var(--bg); min-height: 150px; }
+        #cricket-score-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 
         /* PLAYER SECTION (MIDDLE) */
         .video-container { background: #000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 5px; }
@@ -38,7 +30,7 @@
         .user { font-weight: bold; color: var(--blue); font-size: 13px; }
         .text { font-size: 13px; color: #e6edf3; margin-left: 5px; }
 
-        @media (max-width: 768px) { .video-js { height: 260px !important; } .asli-score-box { height: 180px; } }
+        @media (max-width: 768px) { .video-js { height: 260px !important; } }
     </style>
 </head>
 <body>
@@ -48,11 +40,11 @@
         <span class="nav-brand">RANJAN <span style="color:var(--accent)">GAMER</span></span>
     </nav>
 
-    <div class="score-container">
-        <div class="asli-score-box">
-            <iframe src="https://m.cricbuzz.com/cricket-match/live-scores" 
-                    style="width:100%; height:500px; border:none; margin-top:-180px;" 
-                    scrolling="no"></iframe>
+    <div class="score-section">
+        <div id="cricket-score-container">
+            <iframe src="https://www.scorebat.com/embed/livescore/" 
+                    style="width:100%; height:150px; border:none;" 
+                    scrolling="yes" class="_scorebatEmbeddedPlayer_"></iframe>
         </div>
     </div>
 
@@ -63,9 +55,9 @@
     </div>
 
     <div class="comment-area">
-        <div class="comment-title">Live Fan Chat</div>
+        <div class="comment-title">Live Match Chat</div>
         <div id="chat-msgs" class="chat-box">
-            <div class="msg"><span class="user">Admin:</span> Asli Scorecard Active hai! Enjoy.</div>
+            <div class="msg"><span class="user">System:</span> Real Scoreboard loading... Enjoy!</div>
         </div>
     </div>
 
@@ -73,9 +65,9 @@
     <script>
         const player = videojs('rg-player');
 
-        // Fake Chat (Ye toh humein daalna hi padega taaki log baatein karein)
+        // Fake Chat (Taaki website khali na lage)
         const users = ["Bihar_Boy", "Cricket_Guru", "Ranjan_Fan_1", "Saurav_Sports"];
-        const texts = ["India match jitegi 🇮🇳", "Love from Bihar ❤️", "Stream quality mast hai bhai", "Asli score dikh raha hai ab!"];
+        const texts = ["India match jitegi 🇮🇳", "Ranjan bhai scoreboard mast chal raha hai", "Love from Bihar ❤️", "Sixer!!! 🔥"];
         
         setInterval(() => {
             const cb = document.getElementById('chat-msgs');

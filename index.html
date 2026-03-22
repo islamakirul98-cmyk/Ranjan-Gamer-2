@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER | IPL LIVE</title>
+    <title>NZ vs SA LIVE | RANJAN GAMER</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         :root { --bg: #05080b; --card: #11171e; --accent: #ff0050; --blue: #00d2ff; --border: #1f262e; }
@@ -18,15 +18,15 @@
         .video-box { background: #000; width: 100%; border-bottom: 2px solid var(--border); }
         .video-js { width: 100% !important; max-width: 900px; height: 450px !important; margin: 0 auto; }
 
-        /* 2. NEW REAL SCOREBOARD (CLEAN LOOK) */
+        /* 2. REAL NZ vs SA SCOREBOARD (MIDDLE) */
         .score-wrap { padding: 15px; text-align: center; }
-        .real-card { 
+        .score-card-box { 
             background: var(--card); border-radius: 12px; overflow: hidden; 
             border: 1px solid var(--border); max-width: 860px; margin: 0 auto;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        /* 3. GLOBAL CHAT BOX */
+        /* 3. GLOBAL CHAT BOX (BOTTOM) */
         .chat-section { padding: 0 15px; max-width: 860px; margin: 20px auto; }
         .chat-title { font-size: 16px; font-weight: bold; color: var(--blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         #chat-window { 
@@ -60,7 +60,7 @@
     </div>
 
     <div class="score-wrap">
-        <div class="real-card">
+        <div class="score-card-box">
             <iframe src="https://www.cricketstimes.com/get-score-widget" 
                     style="width:100%; height:135px; border:none;" 
                     scrolling="no"></iframe>
@@ -68,9 +68,9 @@
     </div>
 
     <div class="chat-section">
-        <div class="chat-title">🌎 Global Fan Chat (Live)</div>
+        <div class="chat-title">🌎 Global Fan Chat (NZ vs SA)</div>
         <div id="chat-window">
-            <div class="msg"><span class="user-name">System:</span> Welcome! International fans are joining...</div>
+            <div class="msg"><span class="user-name">System:</span> Fans are joining from New Zealand & South Africa!</div>
         </div>
         <div class="input-bar">
             <input type="text" id="my-msg" placeholder="Type message...">
@@ -82,8 +82,8 @@
     <script>
         const player = videojs('rg-player');
 
-        const globalUsers = ["Aarav_IND 🇮🇳", "Steve_AUS 🇦🇺", "Joe_ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Babar_Fan_PAK 🇵🇰", "Faf_RSA 🇿🇦", "Kane_NZ 🇳🇿"];
-        const fakeTexts = ["IPL is the best! 🔥", "What a shot!", "Love from India! ❤️", "Quality stream, thanks Ranjan Gamer."];
+        const globalUsers = ["Kiwis_Fan_NZ 🇳🇿", "Proteas_Army_RSA 🇿🇦", "Cricket_Expert 🏏", "Ranjan_Live_Fan", "Kane_Superfan"];
+        const fakeTexts = ["What a match! NZ is playing well.", "South Africa's bowling is fire today!", "Love from India! ❤️", "Great stream quality Ranjan bhai."];
 
         // Random Global Chat
         setInterval(() => {

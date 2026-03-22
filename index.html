@@ -3,45 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER LIVE</title>
+    <title>RANJAN GAMER | LIVE</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         :root { --bg: #05080b; --card: #11171e; --accent: #ff0050; --blue: #00d2ff; --border: #1f262e; }
-        body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; padding-bottom: 30px; }
+        body { background: var(--bg); color: #fff; font-family: 'Roboto', sans-serif; margin: 0; padding-bottom: 40px; }
 
         /* NAVBAR */
-        .navbar { background: #0d1117; height: 65px; display: flex; align-items: center; padding: 0 4%; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
-        .nav-logo { height: 45px; width: 45px; border-radius: 50%; border: 2px solid var(--accent); margin-right: 12px; object-fit: cover; }
-        .nav-brand { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        .navbar { background: #0d1117; height: 60px; display: flex; align-items: center; padding: 0 4%; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-logo { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--accent); margin-right: 12px; }
+        .nav-brand { font-size: 20px; font-weight: 900; letter-spacing: 1px; }
 
-        /* --- CREX STYLE SCORECARD (TOP) --- */
-        .crex-box { 
-            background: var(--card); margin: 15px; border-radius: 15px; padding: 20px; 
-            border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* 1. VIDEO PLAYER (TOP) */
+        .video-box { background: #000; width: 100%; border-bottom: 2px solid var(--border); }
+        .video-js { width: 100% !important; max-width: 900px; height: 450px !important; margin: 0 auto; }
+
+        /* 2. SCORECARD (BELOW VIDEO) */
+        .score-wrap { padding: 15px; }
+        .crex-card { 
+            background: var(--card); border-radius: 12px; padding: 18px; 
+            border: 1px solid var(--border); max-width: 860px; margin: 0 auto;
         }
-        .match-info { font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 15px; text-transform: uppercase; display: flex; align-items: center; }
-        .dot { height: 8px; width: 8px; background: var(--accent); border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
-        
+        .match-info { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; text-transform: uppercase; }
+        .dot { height: 7px; width: 7px; background: var(--accent); border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         .score-row { display: flex; justify-content: space-between; align-items: center; }
-        .team { display: flex; align-items: center; gap: 12px; }
-        .team img { width: 45px; height: 32px; border-radius: 4px; border: 1px solid #333; }
-        .team-name { font-size: 20px; font-weight: bold; }
-        .main-score { font-size: 30px; font-weight: 900; }
-        .overs { font-size: 14px; color: #8b949e; font-weight: normal; margin-left: 5px; }
+        .team { display: flex; align-items: center; gap: 10px; }
+        .team img { width: 40px; height: 28px; border-radius: 4px; }
+        .main-score { font-size: 26px; font-weight: 900; }
+        .ovs { font-size: 14px; color: #8b949e; font-weight: normal; }
 
-        /* VIDEO PLAYER */
-        .video-container { background: #000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .video-js { width: 100% !important; max-width: 1000px; height: 500px !important; margin: 0 auto; }
+        /* 3. HYBRID COMMENT BOX (BOTTOM) */
+        .chat-section { padding: 0 15px; max-width: 860px; margin: 20px auto; }
+        .chat-title { font-size: 16px; font-weight: bold; color: var(--blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        
+        #chat-window { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 10px 10px 0 0;
+            height: 250px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .msg { background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--accent); font-size: 13px; animation: fadeIn 0.4s ease; }
+        .user-name { font-weight: bold; color: var(--blue); margin-right: 6px; }
+        .user-self { border-left: 3px solid #00ff88 !important; } /* Highlight user's own message */
 
-        /* LIVE CHAT (BOTTOM) */
-        .chat-section { padding: 20px 5%; }
-        .chat-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: var(--blue); border-left: 5px solid var(--blue); padding-left: 12px; }
-        .chat-box { background: var(--card); border-radius: 12px; height: 250px; overflow-y: auto; padding: 15px; border: 1px solid var(--border); }
-        .msg { background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid var(--accent); font-size: 14px; }
-        .user { font-weight: bold; color: var(--blue); }
+        .input-bar { 
+            display: flex; gap: 5px; background: #1c222a; padding: 10px; 
+            border-radius: 0 0 10px 10px; border: 1px solid var(--border); border-top: none;
+        }
+        .input-bar input { 
+            background: #0d1117; border: 1px solid #333; color: #fff; padding: 10px; 
+            border-radius: 5px; outline: none; font-size: 13px;
+        }
+        #my-name { width: 30%; }
+        #my-msg { width: 60%; }
+        .send-btn { width: 10%; background: var(--blue); border: none; color: #fff; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
         @keyframes blink { 0% {opacity:1} 50% {opacity:0.3} 100% {opacity:1} }
-        @media (max-width: 768px) { .video-js { height: 280px !important; } .main-score { font-size: 24px; } }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(5px);} to {opacity: 1; transform: translateY(0);} }
+        @media (max-width: 768px) { .video-js { height: 260px !important; } #my-name { width: 35%; } #my-msg { width: 50%; } .send-btn { width: 15%; } }
     </style>
 </head>
 <body>
@@ -51,47 +68,75 @@
         <span class="nav-brand">RANJAN <span style="color:var(--accent)">GAMER</span></span>
     </nav>
 
-    <div class="crex-box">
-        <div class="match-info"><span class="dot"></span> Live Match • Ranjan Gamer Special</div>
-        <div class="score-row">
-            <div class="team"><img src="https://flagcdn.com/w80/in.png"><span class="team-name">IND</span></div>
-            <div class="main-score" id="score">184/3 <span class="overs" id="overs">(17.4)</span></div>
-            <div class="team"><span class="team-name">AUS</span><img src="https://flagcdn.com/w80/au.png"></div>
-        </div>
-    </div>
-
-    <div class="video-container">
-        <video id="rg-stream" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto">
+    <div class="video-box">
+        <video id="rg-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
             <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
         </video>
     </div>
 
+    <div class="score-wrap">
+        <div class="crex-card">
+            <div class="match-info"><span class="dot"></span> Live • Ranjan Gamer Pro Feed</div>
+            <div class="score-row">
+                <div class="team"><img src="https://flagcdn.com/w80/in.png"><span class="team-name">IND</span></div>
+                <div class="main-score" id="runs">184/3 <span class="ovs" id="overs">(17.4)</span></div>
+                <div class="team"><span class="team-name">AUS</span><img src="https://flagcdn.com/w80/au.png"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="chat-section">
-        <div class="chat-title">Live Chat</div>
-        <div id="chat-msgs" class="chat-box"></div>
+        <div class="chat-title">💬 Live Fan Chat</div>
+        <div id="chat-window">
+            <div class="msg"><span class="user-name">System:</span> Welcome! Apne comments niche type karein.</div>
+        </div>
+        <div class="input-bar">
+            <input type="text" id="my-name" placeholder="Naam">
+            <input type="text" id="my-msg" placeholder="Message...">
+            <button class="send-btn" onclick="userSend()">➤</button>
+        </div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
-        const player = videojs('rg-stream');
+        const player = videojs('rg-player');
+
+        // Real User Message
+        function userSend() {
+            const name = document.getElementById('my-name').value || "Guest";
+            const text = document.getElementById('my-msg').value;
+            const win = document.getElementById('chat-window');
+
+            if(text.trim() !== "") {
+                const d = document.createElement('div');
+                d.className = 'msg user-self';
+                d.innerHTML = `<span class="user-name">${name}:</span> ${text}`;
+                win.appendChild(d);
+                win.scrollTop = win.scrollHeight;
+                document.getElementById('my-msg').value = "";
+            }
+        }
+
+        // Fake Messages Script
+        const fakeUsers = ["Bihar_Boy", "Ritesh_Sports", "Kohli_Fan", "Saurav_Live", "Rahul_Bihar"];
+        const fakeTexts = ["India will win today! 🇮🇳", "Ranjan bhai stream ki quality mast hai", "Love from Bihar ❤️", "Kya shot maara Kohli ne!", "Scorecard ekdum fast hai", "Great stream bro! 🔥"];
         
-        // Auto Score Update (Simulated)
-        let r = 184, b = 106;
+        setInterval(() => {
+            const win = document.getElementById('chat-window');
+            const d = document.createElement('div');
+            d.className = 'msg';
+            d.innerHTML = `<span class="user-name">${fakeUsers[Math.floor(Math.random()*fakeUsers.length)]}:</span> ${fakeTexts[Math.floor(Math.random()*fakeTexts.length)]}`;
+            win.appendChild(d);
+            win.scrollTop = win.scrollHeight;
+            if(win.children.length > 15) win.removeChild(win.firstChild);
+        }, 5000); // 5 second mein ek fake message aayega
+
+        // Score Simulation
+        let r=184, b=106;
         setInterval(() => {
             r += Math.floor(Math.random()*2); b++;
-            document.getElementById('score').innerHTML = r + "/3 <span class='overs'>(" + Math.floor(b/6) + "." + (b%6) + ")</span>";
+            document.getElementById('runs').innerHTML = r + "/3 <span class='ovs'>(" + Math.floor(b/6) + "." + (b%6) + ")</span>";
         }, 8000);
-
-        // Auto Chat
-        const users = ["Bihar_Boy", "Cricket_Fan", "Ranjan_Fan"];
-        const texts = ["India jitegi 🇮🇳", "Quality mast hai bhai!", "Love from Bihar ❤️"];
-        setInterval(() => {
-            const cb = document.getElementById('chat-msgs');
-            const d = document.createElement('div'); d.className = 'msg';
-            d.innerHTML = `<span class="user">${users[Math.floor(Math.random()*3)]}:</span> ${texts[Math.floor(Math.random()*3)]}`;
-            cb.appendChild(d); cb.scrollTop = cb.scrollHeight;
-            if(cb.children.length > 8) cb.removeChild(cb.firstChild);
-        }, 4000);
     </script>
 </body>
 </html>

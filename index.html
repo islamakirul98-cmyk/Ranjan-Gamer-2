@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer | Live Sports</title>
+    <title>Ranjan Gamer | Pro Sports OTT</title>
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         :root { --bg: #030b17; --nav: #121921; --blue: #1f80e0; --card-bg: #192133; }
@@ -13,37 +13,36 @@
         .nav-logo { height: 40px; margin-right: 30px; border-radius: 5px; border: 1px solid var(--blue); }
 
         .main-view { padding-top: 72px; display: flex; flex-wrap: wrap; background: #000; }
-        .player-side { flex: 3; min-width: 300px; position: relative; }
-        .video-js { width: 100% !important; height: 500px !important; }
+        .player-side { flex: 3; min-width: 300px; position: relative; transition: 0.5s; }
+        
+        /* Default Player Size */
+        .video-js { width: 100% !important; height: 500px !important; margin: 0 auto; }
 
-        /* --- SPORTS LIVE CHAT --- */
+        /* Settings Bar */
+        .settings-bar { background: #1a242f; padding: 10px 4%; display: flex; gap: 20px; align-items: center; border-bottom: 1px solid #333; }
+        .settings-bar select { background: #0b1119; color: white; border: 1px solid var(--blue); padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+
         .chat-side { flex: 1; min-width: 300px; background: #0f171e; height: 500px; border-left: 1px solid #333; display: flex; flex-direction: column; }
         .chat-header { padding: 15px; background: #1a242f; font-weight: bold; border-bottom: 1px solid #333; color: var(--blue); font-size: 14px; }
         .chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
-        .msg { background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; border-left: 3px solid var(--blue); }
+        .msg { background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; }
         .user { color: #00d2ff; font-weight: bold; margin-right: 5px; }
 
         .stream-info { padding: 20px 4%; background: linear-gradient(to bottom, #000, var(--bg)); width: 100%; }
-        .stream-title { font-size: 22px; font-weight: bold; margin: 0; }
-        .view-count { color: #ff0000; font-weight: bold; font-size: 14px; margin-top: 10px; display: flex; align-items: center; }
+        .view-count { color: #ff0000; font-weight: bold; font-size: 14px; margin-top: 5px; display: flex; align-items: center; }
         .dot { height: 8px; width: 8px; background: #ff0000; border-radius: 50%; display: inline-block; margin-right: 7px; animation: blink 1s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        .content-section { padding: 20px 4%; }
-        .channel-list { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 20px; scrollbar-width: none; }
-        .chan-card { min-width: 170px; height: 105px; background: var(--card-bg); border-radius: 8px; cursor: pointer; border: 1px solid #333; position: relative; overflow: hidden; }
-        .chan-card img { width: 100%; height: 100%; object-fit: contain; padding: 10px; background: #fff; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <img src="1000034992.png" class="nav-logo" alt="Ranjan Gamer" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
-        <span style="font-weight:bold; letter-spacing:1px; color:var(--blue);">RANJAN SPORTS LIVE</span>
+        <span style="font-weight:bold; color:var(--blue);">RANJAN SPORTS LIVE</span>
     </nav>
 
     <div class="main-view">
-        <div class="player-side">
+        <div class="player-side" id="p-side">
             <video id="h-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted>
                 <source src="https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8" type="application/x-mpegURL">
             </video>
@@ -51,28 +50,33 @@
 
         <div class="chat-side">
             <div class="chat-header">LIVE SPORTS CHAT</div>
-            <div class="chat-messages" id="chat-box">
-                <div class="msg"><span class="user">Admin:</span> Match shuru hone wala hai! Score kya hoga?</div>
+            <div id="chat-box" class="chat-messages">
+                <div class="msg"><span class="user">Admin:</span> Quality setting check karein!</div>
             </div>
         </div>
+    </div>
+
+    <div class="settings-bar">
+        <span>⚙️ Quality:</span>
+        <select id="quality-select">
+            <option value="auto">Auto (Best)</option>
+            <option value="1080p">1080p HD</option>
+            <option value="720p">720p HD</option>
+            <option value="480p">480p SD</option>
+        </select>
+
+        <span>🖥️ Player Size:</span>
+        <select id="size-select" onchange="changeSize()">
+            <option value="normal">Normal</option>
+            <option value="large">Cinema Mode (Full Width)</option>
+            <option value="small">Compact</option>
+        </select>
     </div>
 
     <div class="stream-info">
-        <h1 class="stream-title" id="playing-title">Live Sports Amagi Feed</h1>
+        <h1 id="playing-title" style="font-size:22px; margin:0;">Live Sports Amagi Feed</h1>
         <div class="view-count">
-            <span class="dot"></span> <span id="v-count">58</span> Watching Now
-        </div>
-    </div>
-
-    <div class="content-section">
-        <h2 style="font-size:18px; margin-bottom:15px; color:rgba(255,255,255,0.7);">More Channels</h2>
-        <div class="channel-list">
-            <div class="chan-card" onclick="playIt('https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8', 'Main Amagi Stream')">
-                <img src="1000034992.png" onerror="this.src='https://via.placeholder.com/150?text=RANJAN'">
-            </div>
-            <div class="chan-card" onclick="playIt('http://103.199.160.85/Out_HLS/Starsports1/index.m3u8', 'Star Sports 1')">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Star_Sports_logo.svg/1200px-Star_Sports_logo.svg.png">
-            </div>
+            <span class="dot"></span> <span id="v-count">56</span> Watching Now
         </div>
     </div>
 
@@ -80,46 +84,48 @@
     <script>
         const hPlayer = videojs('h-player');
         
-        // FAKE VIEWS (50-60 ke bich)
+        // 1. FAKE VIEWS
         setInterval(() => {
             let views = Math.floor(Math.random() * (60 - 50 + 1)) + 50;
             document.getElementById('v-count').innerText = views;
         }, 5000);
 
-        // FAKE SPORTS CHAT SCRIPT
-        const users = ["Cricket_Fan", "SportsLover", "Bihar_Power", "Ritesh_Kumar", "Saurav_FF", "Anjali_S", "King_Kohli_Fan"];
-        const texts = [
-            "Kya shot mara hai!", 
-            "India match jitegi pakka 🇮🇳", 
-            "Love from Bihar ❤️", 
-            "Next wicket kab girega?", 
-            "Bhai stream ekdum HD hai mast", 
-            "Kohli is the real King 👑", 
-            "Dhoni ko miss kar rahe hain", 
-            "Great coverage Ranjan Bhai!",
-            "Sixer!!! 🔥",
-            "Bowling tagdi ho rahi hai"
-        ];
+        // 2. FAKE CHAT
+        const users = ["Cricket_Fan", "Sports_Bihar", "King_Ranjan", "Saurav_S", "MatchDay"];
+        const texts = ["Match badhiya chal raha hai", "Full HD quality hai!", "Love from Bihar ❤️", "Sixer!!! 🔥", "India hi jitegi"];
         
         setInterval(() => {
             const chatBox = document.getElementById('chat-box');
-            const randomUser = users[Math.floor(Math.random() * users.length)];
-            const randomText = texts[Math.floor(Math.random() * texts.length)];
-            
             const newMsg = document.createElement('div');
             newMsg.className = 'msg';
-            newMsg.innerHTML = `<span class="user">${randomUser}:</span> ${randomText}`;
+            newMsg.innerHTML = `<span class="user">${users[Math.floor(Math.random()*users.length)]}:</span> ${texts[Math.floor(Math.random()*texts.length)]}`;
             chatBox.appendChild(newMsg);
             chatBox.scrollTop = chatBox.scrollHeight;
-
-            if(chatBox.children.length > 20) chatBox.removeChild(chatBox.firstChild);
+            if(chatBox.children.length > 10) chatBox.removeChild(chatBox.firstChild);
         }, 4000);
 
-        function playIt(url, name) {
-            hPlayer.src({ src: url, type: 'application/x-mpegURL' });
-            hPlayer.play();
-            document.getElementById('playing-title').innerText = name;
+        // 3. PLAYER SIZE SETTING
+        function changeSize() {
+            const size = document.getElementById('size-select').value;
+            const pSide = document.getElementById('p-side');
+            const videoElement = document.getElementById('h-player');
+
+            if(size === "large") {
+                pSide.style.flex = "10";
+                videoElement.style.height = "650px";
+            } else if(size === "small") {
+                pSide.style.flex = "2";
+                videoElement.style.height = "350px";
+            } else {
+                pSide.style.flex = "3";
+                videoElement.style.height = "500px";
+            }
         }
+
+        // Quality setting (Simulated for HLS)
+        document.getElementById('quality-select').onchange = function() {
+            alert("Quality setting " + this.value + " apply ho rahi hai...");
+        };
     </script>
 </body>
 </html>

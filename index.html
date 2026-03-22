@@ -3,82 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer Pro Live</title>
+    <title>Ranjan Gamer OTT | JioHotstar Edition</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        body { 
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%); 
-            color: #fff; 
-            font-family: 'Segoe UI', sans-serif; 
-            text-align: center; 
-            margin: 0;
-            padding: 20px;
-        }
-        .header { margin-top: 10px; margin-bottom: 20px; }
+        :root { --main-color: #00d2ff; --bg-dark: #0f171e; --card-bg: #1a242f; }
+        body { background-color: var(--bg-dark); color: white; font-family: 'Segoe UI', sans-serif; }
         
-        /* Logo Styling - Pro Gamer Look */
-        .logo { 
-            width: 150px; 
-            height: 150px;
-            border-radius: 20px; 
-            border: 3px solid #ff0050; 
-            box-shadow: 0 0 30px rgba(255, 0, 80, 0.7);
-            background: #000;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
+        /* Header Styling */
+        .navbar { background: rgba(15, 23, 30, 0.95); border-bottom: 1px solid #333; }
+        .navbar-brand { font-weight: bold; color: var(--main-color) !important; font-size: 24px; }
+        
+        /* Player Section */
+        .player-wrapper { background: #000; padding: 20px 0; border-bottom: 2px solid var(--main-color); }
+        .video-js { width: 100% !important; height: 500px !important; margin: 0 auto; border-radius: 8px; }
 
-        .player-box { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            border: 2px solid rgba(255, 0, 80, 0.4); 
-            border-radius: 15px; 
-            overflow: hidden; 
-            box-shadow: 0 0 50px rgba(0, 0, 0, 1); 
+        /* Channel Grid */
+        .channel-card { 
+            background: var(--card-bg); border: none; transition: 0.3s; cursor: pointer; 
+            border-radius: 10px; overflow: hidden; margin-bottom: 20px;
         }
-        .video-js { width: 100% !important; height: 500px !important; }
-        
-        h1 { 
-            color: #fff; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            margin: 10px 0;
-            text-shadow: 0 0 15px #ff0050;
-            font-size: 32px;
-        }
-        .live-status {
-            color: #00ff00;
-            font-weight: bold;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .channel-card:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--main-color); }
+        .card-body { padding: 10px; text-align: center; font-weight: bold; font-size: 14px; }
+        .card-img-top { height: 120px; object-fit: contain; background: #fff; padding: 10px; }
+
+        .section-title { margin: 30px 0 20px; font-weight: bold; border-left: 4px solid var(--main-color); padding-left: 15px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <img src="https://i.postimg.cc/856vj6xN/Ranjan-Gamer-Logo.png" class="logo" alt="Ranjan Gamer Logo">
-        <h1>Ranjan Gamer Pro Live</h1>
-        <div class="live-status">● LIVE STREAMING ON</div>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">RANJAN<span>OTT</span></a>
+        <div class="d-flex text-white align-items-center">
+            <small class="me-3">Welcome, Ashish</small>
+        </div>
     </div>
+</nav>
 
-    <div class="player-box">
-        <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay muted>
+<div class="player-wrapper">
+    <div class="container">
+        <video id="main-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay muted>
             <source src="http://116.90.120.151:8000/play/a0hi/index.m3u8" type="application/x-mpegURL">
         </video>
+        <h4 id="now-playing" class="mt-3 text-info">Now Playing: Default Channel</h4>
     </div>
+</div>
 
-    <p style="color: #444; margin-top: 30px; font-size: 12px;">
-        Settings Check: Browser setting mein "Insecure Content" <b>Allow</b> karein tabhi video dikhegi.
-    </p>
+<div class="container">
+    <h3 class="section-title">Live TV Channels</h3>
+    <div class="row" id="channel-grid">
+        </div>
+</div>
 
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
-    <script>
-        var player = videojs('my-video');
-        player.ready(function() {
+<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+<script>
+    const player = videojs('main-player');
+
+    // --- APNE CHANNELS YAHAN ADD KAREIN ---
+    const channels = [
+        { name: "My Personal Channel", logo: "https://i.postimg.cc/856vj6xN/Ranjan-Gamer-Logo.png", url: "http://116.90.120.151:8000/play/a0hi/index.m3u8" },
+        { name: "Star Sports 1", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Star_Sports_logo.svg/1200px-Star_Sports_logo.svg.png", url: "http://example.com/stream1.m3u8" },
+        { name: "Sony Ten", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sony_Ten_logo.png/640px-Sony_Ten_logo.png", url: "http://example.com/stream2.m3u8" },
+        { name: "Disney+ Hotstar", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_Hotstar_logo.png", url: "http://example.com/stream3.m3u8" }
+    ];
+
+    const grid = document.getElementById('channel-grid');
+
+    channels.forEach(ch => {
+        const col = document.createElement('div');
+        col.className = 'col-6 col-md-3 col-lg-2';
+        col.innerHTML = `
+            <div class="card channel-card">
+                <img src="${ch.logo}" class="card-img-top" alt="${ch.name}">
+                <div class="card-body">${ch.name}</div>
+            </div>
+        `;
+        col.onclick = () => {
+            player.src({ type: 'application/x-mpegURL', src: ch.url });
             player.play();
-        });
-    </script>
+            document.getElementById('now-playing').innerText = "Now Playing: " + ch.name;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        grid.appendChild(col);
+    });
+</script>
+
 </body>
 </html>

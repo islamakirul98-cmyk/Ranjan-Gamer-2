@@ -3,107 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANJAN GAMER | LIVE TV</title>
+    <title>RANJAN GAMER | PREMIUM TV</title>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1.0.1/dist/city/index.css" rel="stylesheet">
+    
     <style>
-        :root { --main-bg: #0f1014; --card-bg: #1a1c22; --accent: #1f80e0; --live-red: #ff0037; }
-        body { background: var(--main-bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 50px; }
+        :root { --main-bg: #0f1014; --card-bg: #1a1c22; --accent: #ffcc00; --blue: #1f80e0; --live-red: #ff0037; }
+        body { background: var(--main-bg); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 50px; }
 
-        /* HEADER */
-        .navbar { height: 60px; display: flex; align-items: center; padding: 0 20px; background: rgba(15, 16, 20, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #2a2d36; }
-        .logo { font-size: 20px; font-weight: 900; color: var(--accent); text-transform: uppercase; }
+        /* NAVBAR */
+        .navbar { height: 60px; display: flex; align-items: center; padding: 0 20px; background: #0f1014; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--accent); }
+        .logo { font-size: 20px; font-weight: 900; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
 
-        /* SECTION STYLE */
-        .section-title { padding: 20px 20px 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .section-title span { color: var(--accent); }
-
-        .horizontal-scroll { 
-            display: flex; overflow-x: auto; gap: 15px; padding: 0 20px 20px; 
-            scrollbar-width: none; 
+        /* --- BADA POSTER (BANNER) --- */
+        .featured-banner { 
+            width: 94%; height: 220px; margin: 15px auto; 
+            background: linear-gradient(to top, rgba(15,16,20,1), transparent), url('https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/4255/1364255-h-b789e5a5a5');
+            background-size: cover; background-position: center; border-radius: 15px; 
+            display: flex; align-items: flex-end; padding: 25px; box-sizing: border-box;
+            border: 2px solid var(--accent); cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
-        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        .banner-info h2 { margin: 0; font-size: 24px; color: var(--accent); text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .banner-info p { color: #00ff88; font-size: 13px; font-weight: bold; margin: 5px 0; }
 
-        /* PREMIUM NEWS CARD */
-        .channel-card { 
-            min-width: 160px; background: var(--card-bg); border-radius: 12px; 
-            overflow: hidden; border: 1px solid #2a2d36; transition: 0.3s; cursor: pointer;
+        /* SECTION TITLES */
+        .section-title { padding: 20px 20px 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 8px; color: var(--accent); }
+
+        /* HORIZONTAL SCROLL LIST */
+        .scroll-container { display: flex; overflow-x: auto; gap: 15px; padding: 0 20px 20px; scrollbar-width: none; }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
+        /* CARDS */
+        .card { 
+            min-width: 150px; background: var(--card-bg); border-radius: 12px; 
+            overflow: hidden; border: 1px solid #333; transition: 0.3s; cursor: pointer;
         }
-        .channel-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        .thumb { width: 100%; height: 90px; background: #222; position: relative; display: flex; align-items: center; justify-content: center; }
-        .thumb img { height: 60%; object-fit: contain; }
-        .live-tag { position: absolute; top: 8px; left: 8px; background: var(--live-red); padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px; animation: blink 1s infinite; }
+        .card-thumb { width: 100%; height: 85px; background: #222; position: relative; display: flex; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box; }
+        .card-thumb img { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .live-dot { position: absolute; top: 8px; left: 8px; background: var(--live-red); padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px; animation: blink 1s infinite; }
         
-        .info { padding: 12px; text-align: center; background: #1a1c22; }
-        .info h3 { font-size: 14px; margin: 0; font-weight: 600; }
-        .info p { font-size: 11px; color: #888; margin: 4px 0 0; }
+        .card-meta { padding: 10px; text-align: center; }
+        .card-meta h3 { font-size: 14px; margin: 0; color: #fff; }
+        .card-meta p { font-size: 11px; color: #888; margin-top: 4px; }
 
-        /* PILLS CATEGORY */
-        .pills { display: flex; gap: 10px; padding: 15px 20px; overflow-x: auto; }
-        .pill { background: #2a2d36; padding: 8px 20px; border-radius: 20px; font-size: 12px; white-space: nowrap; cursor: pointer; border: 1px solid transparent; }
-        .pill.active { background: rgba(31, 128, 224, 0.2); border-color: var(--accent); color: var(--accent); }
+        @keyframes blink { 0%, 100% {opacity: 1;} 50% {opacity: 0.5;} }
 
-        @keyframes blink { 0%, 100% {opacity: 1;} 50% {opacity: 0.6;} }
+        /* FULL SCREEN PLAYER MODAL */
+        #player-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; flex-direction: column; align-items: center; justify-content: center; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; z-index: 2100; }
+        .video-wrapper { width: 90%; max-width: 800px; background: #1e1e1e; padding: 10px; border-radius: 12px; border: 2px solid var(--accent); }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">RANJAN GAMER <span style="color:#fff">TV</span></div>
+        <div class="logo">🏏 RANJAN GAMER LIVE</div>
     </nav>
 
-    <div class="pills">
-        <div class="pill active">All Live</div>
-        <div class="pill">Cricket</div>
-        <div class="pill">News</div>
-        <div class="pill">Entertainment</div>
+    <div class="featured-banner" onclick="playLive('https://oppu.freelivtv.workers.dev/play.m3u8?id=167574', '🏏 Ranjan Gamer Special Live')">
+        <div class="banner-info">
+            <p>● LIVE MATCH NOW</p>
+            <h2>IND vs ENG: Live Stream</h2>
+            <button style="background:var(--accent); border:none; color:#000; padding:10px 25px; border-radius:5px; margin-top:10px; font-weight:bold; cursor:pointer; text-transform:uppercase;">Click to Watch Live</button>
+        </div>
     </div>
 
-    <div class="section-title"><span>●</span> Live News Channels</div>
-    <div class="horizontal-scroll">
-        
-        <div class="channel-card" onclick="openPlayer('https://feeds.intoday.in/aajtak/api/aajtakhd/master.m3u8', 'Aaj Tak HD')">
-            <div class="thumb">
-                <div class="live-tag">LIVE</div>
+    <div class="section-title">📺 Live News Channels</div>
+    <div class="scroll-container">
+        <div class="card" onclick="playLive('https://feeds.intoday.in/aajtak/api/aajtakhd/master.m3u8', 'Aaj Tak HD Live')">
+            <div class="card-thumb">
+                <div class="live-dot">LIVE</div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Aaj_Tak_Logo.png" alt="Aaj Tak">
             </div>
-            <div class="info">
+            <div class="card-meta">
                 <h3>Aaj Tak</h3>
-                <p>Sabse Tez • Hindi News</p>
+                <p>Sabse Tez Live</p>
             </div>
         </div>
 
-        <div class="channel-card" onclick="openPlayer('https://xlbor37ydvaj-hls-live.wmncdn.net/firstindianewstv1/live.stream/index.m3u8', 'First India News')">
-            <div class="thumb">
-                <div class="live-tag">LIVE</div>
+        <div class="card" onclick="playLive('https://xlbor37ydvaj-hls-live.wmncdn.net/firstindianewstv1/live.stream/index.m3u8', 'First India News')">
+            <div class="card-thumb">
+                <div class="live-dot">LIVE</div>
                 <img src="https://via.placeholder.com/80x40/222/fff?text=NEWS" alt="News">
             </div>
-            <div class="info">
+            <div class="card-meta">
                 <h3>First India News</h3>
                 <p>Regional News 24/7</p>
             </div>
         </div>
-
     </div>
 
-    <div class="section-title"><span>●</span> Live Sports</div>
-    <div class="horizontal-scroll">
-        <div class="channel-card" onclick="openPlayer('https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8', 'Sports Live')">
-            <div class="thumb">
-                <div class="live-tag">LIVE</div>
-                <img src="https://via.placeholder.com/80x40/222/fff?text=CRICKET" alt="Cricket">
-            </div>
-            <div class="info">
-                <h3>NZ vs SA</h3>
-                <p>1st Test • Day 2</p>
-            </div>
+    <div id="player-modal">
+        <span class="close-btn" onclick="closePlayer()">×</span>
+        <h2 id="match-title" style="color:var(--accent); text-transform:uppercase;">Player</h2>
+        <div class="video-wrapper">
+            <video id="my-live-player" class="video-js vjs-theme-city vjs-big-play-centered" controls preload="auto" width="720" height="405" data-setup='{"fluid": true}'>
+                <source src="" type="application/x-mpegURL">
+            </video>
         </div>
+        <p style="margin-top:15px; font-size:12px; color:#888;">Ranjan Gamer Pro Player • High Quality Stream</p>
     </div>
 
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
-        // Function to open player with selected link
-        function openPlayer(link, title) {
-            // Hum link ko URL parameter ke through player page pe bhej rahe hain
-            window.location.href = `player.html?src=${encodeURIComponent(link)}&name=${encodeURIComponent(title)}`;
+        var player = videojs('my-live-player');
+
+        function playLive(link, title) {
+            document.getElementById('player-modal').style.display = 'flex';
+            document.getElementById('match-title').innerText = title;
+            player.src({ type: 'application/x-mpegURL', src: link });
+            player.play();
+        }
+
+        function closePlayer() {
+            player.pause();
+            document.getElementById('player-modal').style.display = 'none';
         }
     </script>
 

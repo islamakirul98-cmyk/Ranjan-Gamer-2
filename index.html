@@ -9,7 +9,140 @@
     
     <style>
         :root { --bg: #0f1014; --card: #1a1c22; --accent: #ffcc00; --live: #ff0037; }
-        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 20px; }
+        body <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    /* Theme Variables */
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+        --menu-bg: #f1f1f1;
+        --accent-color: #ffcc00;
+    }
+
+    [data-theme="dark"] {
+        --bg-color: #0f0f0f;
+        --text-color: #ffffff;
+        --menu-bg: #2a2a2a;
+    }
+
+    body { 
+        background-color: var(--bg-color); 
+        color: var(--text-color); 
+        transition: 0.3s;
+    }
+
+    /* Header & Menu Style */
+    .header-bar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: var(--menu-bg);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .brand-name { font-weight: bold; font-size: 20px; color: var(--accent-color); }
+
+    .menu-container { position: relative; }
+
+    .menu-btn {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* Dropdown Menu (Mobile Style) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        background-color: var(--menu-bg);
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+        border-radius: 8px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .dropdown-content a, .theme-option {
+        color: var(--text-color);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+        border-bottom: 1px solid #444;
+    }
+
+    .dropdown-content a:hover, .theme-option:hover { background-color: var(--accent-color); color: black; }
+
+    .show { display: block; }
+</style>
+
+<div class="header-bar">
+    <div class="brand-name">🏏 RANJAN GAMER</div>
+    
+    <div class="menu-container">
+        <button onclick="toggleMenu()" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <div class="theme-option" onclick="setTheme('light')"><i class="fas fa-sun"></i> Light Mode</div>
+            <div class="theme-option" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Dark Mode</div>
+            <div class="theme-option" onclick="setTheme('system')"><i class="fas fa-mobile-alt"></i> System Default</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Menu Toggle Function
+    function toggleMenu() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Theme Switcher Logic
+    function setTheme(theme) {
+        const root = document.documentElement;
+        
+        if (theme === 'system') {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            theme = prefersDark ? 'dark' : 'light';
+            localStorage.removeItem('user-theme'); // Clear saved choice
+        } else {
+            localStorage.setItem('user-theme', theme); // Save choice
+        }
+
+        root.setAttribute('data-theme', theme);
+        toggleMenu(); // Close menu after selection
+    }
+
+    // Page Load par Theme Check karein
+    const savedTheme = localStorage.getItem('user-theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+        setTheme('system');
+    }
+
+    // Close menu if clicked outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.menu-btn') && !event.target.matches('.fa-bars')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script> { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 20px; }
 
         /* NAVBAR */
         .navbar { height: 60px; display: flex; align-items: center; padding: 0 20px; background: #0b0c0f; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }

@@ -1,216 +1,26 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer - Live TV & Sports</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        /* --- CSS: Old Hotstar Theme --- */
-        :root {
-            --hs-blue: #001f3f; /* Dark Blue from Old Hotstar */
-            --hs-gold: #ffcc00; /* Gold/Yellow accent */
-            --bg-color: #001021; /* Slightly darker body bg */
-            --text-color: #ffffff;
-            --card-bg: #002a54; /* Cards color */
-        }
-
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-bottom: 20px;
-        }
-
-        /* 1. Top Floor: Ranjan Gamer Banner */
-        .top-banner {
-            background-color: var(--hs-blue);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .brand-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--hs-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .menu-icon { font-size: 20px; color: white; cursor: pointer; }
-
-        /* 2. Separator Line */
-        .separator-line {
-            height: 3px;
-            background-color: var(--hs-gold);
-            width: 100%;
-        }
-
-        /* 3. Main Poster Section */
-        .poster-section {
-            width: 100%;
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .main-poster {
-            width: 95%;
-            max-width: 1000px;
-            height: 200px; /* Adjust height as needed */
-            background-image: url('https://via.placeholder.com/1000x200?text=Ranjan+Gamer+Live+Banner'); /* Replace with your banner URL */
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            display: flex;
-            align-items: flex-end;
-            padding: 15px;
-        }
-
-        .poster-title { font-size: 18px; font-weight: bold; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 4px; }
-
-        /* 4. News Channel List Style */
-        .content-section {
-            padding: 10px 15px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            color: var(--hs-gold);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--hs-gold);
-            padding-left: 10px;
-        }
-
-        .channel-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .channel-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            text-decoration: none;
-            color: white;
-            transition: 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .channel-card:hover {
-            border-color: var(--hs-gold);
-            background-color: #003366;
-        }
-
-        .channel-logo {
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            font-size: 20px;
-            color: #aaa;
-        }
-        
-        /* News Icon colors */
-        .news-icon-1 { color: #cc0000; } /* Red */
-        .news-icon-2 { color: #00cc00; } /* Green */
-        .news-icon-3 { color: #0000cc; } /* Blue */
-
-        .channel-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .channel-name { font-weight: bold; font-size: 16px; }
-        .channel-desc { font-size: 12px; color: #ccc; }
-
-        /* Responsive */
-        @media (min-width: 600px) {
-            .channel-list { flex-direction: row; flex-wrap: wrap; }
-            .channel-card { width: calc(50% - 15px); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Hotstar Clone - Ranjan Gamer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="top-banner">
-        <div class="brand-name">Ranjan Gamer</div>
-        <div class="menu-icon"><i class="fas fa-bars"></i></div>
-    </div>
+  <header class="app-header">
+    <div class="logo">Ranjan Gamer</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">TV</a>
+      <a href="#">Movies</a>
+      <a href="#">Sports</a>
+      <a href="#">Premium</a>
+    </nav>
+  </header>
 
-    <div class="separator-line"></div>
-
-    <div class="poster-section">
-        <div class="main-poster">
-            <div class="poster-title">Today's Special Live Event</div>
-        </div>
-    </div>
-
-    <div class="content-section">
-        <div class="section-title">Live News Channels</div>
-        
-        <div class="channel-list">
-            <a href="your-player-link-1.html" class="channel-card">
-                <div class="channel-logo">
-                    <i class="fas fa-rss news-icon-1"></i>
-                </div>
-                <div class="channel-info">
-                    <span class="channel-name">Live News 1</span>
-                    <span class="channel-desc">Top headlines from India.</span>
-                </div>
-            </a>
-
-            <a href="your-player-link-2.html" class="channel-card">
-                <div class="channel-logo">
-                    <i class="fas fa-newspaper news-icon-2"></i>
-                </div>
-                <div class="channel-info">
-                    <span class="channel-name">Global News 24/7</span>
-                    <span class="channel-desc">International updates.</span>
-                </div>
-            </a>
-
-            <a href="your-player-link-3.html" class="channel-card">
-                <div class="channel-logo">
-                    <i class="fas fa-microphone news-icon-3"></i>
-                </div>
-                <div class="channel-info">
-                    <span class="channel-name">Ranjan Live Discussion</span>
-                    <span class="channel-desc">Gaming & Sports analysis.</span>
-                </div>
-            </a>
-
-            <a href="your-player-link-4.html" class="channel-card">
-                <div class="channel-logo" style="background-color: var(--hs-gold); color: black;">
-                    <i class="fas fa-gamepad"></i>
-                </div>
-                <div class="channel-info">
-                    <span class="channel-name">Free Fire Live Tourney</span>
-                    <span class="channel-desc">Ranjan Gamer Special stream.</span>
-                </div>
-            </a>
-
-        </div>
-    </div>
+  <main>
+    <!-- yahan par carousel / movie cards aaenge -->
+  </main>
 
 </body>
 </html>

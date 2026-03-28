@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer Live - JioHotstar Style</title>
+    <title>Ranjan Gamer Live - Pro Theme</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- Jio-Hotstar Dark Theme --- */
+        /* --- CSS Variables for Themes --- */
         :root {
-            --main-blue: #0c111b; /* Deep Dark Blue */
-            --nav-blue: #141b29;  /* Navigation Blue */
-            --accent-blue: #1f80e0; /* Jio/Hotstar Blue */
-            --gold: #ffcc00;
-            --white: #ffffff;
+            /* Default Dark Mode (Jio Style) */
+            --bg-body: #0c111b;
+            --bg-nav: #141b29;
+            --text-main: #ffffff;
+            --text-sub: #8894ab;
+            --accent-blue: #1f80e0;
+            --card-bg: #141b29;
+            --border-line: #1f80e0;
+        }
+
+        /* Light Mode Colors */
+        [data-theme="light"] {
+            --bg-body: #f0f2f5;
+            --bg-nav: #ffffff;
+            --text-main: #1c1e21;
+            --text-sub: #606770;
+            --accent-blue: #0056b3;
+            --card-bg: #ffffff;
+            --border-line: #0056b3;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--main-blue);
-            color: var(--white);
+            background-color: var(--bg-body);
+            color: var(--text-main);
             font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
             overflow-x: hidden;
         }
 
-        /* 1. Header & Top Floor */
+        /* 1. Header with Theme Toggle Logo */
         header {
-            background-color: var(--nav-blue);
+            background-color: var(--bg-nav);
             padding: 12px 5%;
             display: flex;
             align-items: center;
@@ -35,50 +50,42 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--accent-blue); /* Teri Blue Line */
+            border-bottom: 3px solid var(--border-line);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
-            color: var(--white);
             text-transform: uppercase;
         }
-
         .logo span { color: var(--accent-blue); }
 
-        /* 2. Banner / Slider Section */
+        /* Theme Toggle Icon */
+        #theme-toggle {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--accent-blue);
+            transition: transform 0.3s;
+        }
+        #theme-toggle:hover { transform: rotate(30deg); }
+
+        /* 2. Banner */
         .banner {
             width: 90%;
-            height: 200px;
+            height: 180px;
             margin: 20px auto;
-            background: linear-gradient(to right, rgba(12,17,27,1), rgba(12,17,27,0)), url('https://via.placeholder.com/1000x400?text=IPL+LIVE+ON+RANJAN+GAMER'); 
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
+            background: linear-gradient(45deg, var(--accent-blue), #000);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             padding: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            color: white;
         }
 
-        .banner-content h2 { font-size: 24px; margin: 0; }
-        .banner-content p { color: #8894ab; font-size: 14px; }
-
-        /* 3. Categories (Jio Style) */
-        .tray-container {
-            padding: 10px 5%;
-        }
-
-        .tray-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .tray-title a { color: var(--accent-blue); font-size: 12px; text-decoration: none; }
+        /* 3. Grid & Cards */
+        .tray-container { padding: 10px 5%; }
+        .tray-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
 
         .items-grid {
             display: grid;
@@ -87,64 +94,31 @@
         }
 
         .item-card {
-            background: var(--nav-blue);
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s;
-            cursor: pointer;
-            position: relative;
+            border: 1px solid rgba(128,128,128,0.2);
+            transition: 0.3s;
         }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
 
-        .item-card:hover {
-            transform: scale(1.05);
-            border: 2px solid var(--white);
-        }
+        .item-card img { width: 100%; height: 160px; object-fit: cover; }
+        .item-info { padding: 8px; font-size: 14px; text-align: center; }
 
-        .item-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .live-tag {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background: red;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        .item-info {
-            padding: 8px;
-            font-size: 14px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* 4. Footer Nav (Mobile App Look) */
+        /* 4. Bottom Nav (App Feel) */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: var(--nav-blue);
+            background: var(--bg-nav);
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
-            border-top: 1px solid #333;
+            border-top: 1px solid rgba(128,128,128,0.2);
         }
-
-        .nav-link {
-            color: #8894ab;
-            text-decoration: none;
-            font-size: 10px;
-            text-align: center;
-        }
-
-        .nav-link i { font-size: 20px; display: block; margin-bottom: 3px; }
-        .nav-link.active { color: var(--white); }
+        .nav-link { color: var(--text-sub); text-decoration: none; font-size: 10px; text-align: center; }
+        .nav-link.active { color: var(--accent-blue); }
+        .nav-link i { font-size: 20px; display: block; }
 
     </style>
 </head>
@@ -152,51 +126,61 @@
 
     <header>
         <div class="logo">RANJAN <span>GAMER</span></div>
-        <div class="search"><i class="fas fa-search"></i></div>
+        <div id="theme-toggle">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
     </header>
 
     <div class="banner">
-        <div class="banner-content">
-            <h2>TATA IPL 2026</h2>
-            <p>Watch Live Match Free | No Lag</p>
-            <button style="background: var(--accent-blue); color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; font-weight: bold;">WATCH NOW</button>
+        <div>
+            <h2 style="margin:0">IPL 2026 LIVE</h2>
+            <p style="font-size:14px">High Quality | Low Data</p>
         </div>
     </div>
 
     <div class="tray-container">
-        <div class="tray-title">
-            <span>Popular Live Channels</span>
-            <a href="#">VIEW ALL</a>
-        </div>
-        
+        <div class="tray-title">Live Channels</div>
         <div class="items-grid">
             <div class="item-card">
-                <span class="live-tag">LIVE</span>
-                <img src="https://via.placeholder.com/150x200?text=Star+Sports" alt="Star Sports">
+                <img src="https://via.placeholder.com/150x200?text=Star+Sports" alt="Star">
                 <div class="item-info">Star Sports 1</div>
             </div>
             <div class="item-card">
-                <span class="live-tag">LIVE</span>
-                <img src="https://via.placeholder.com/150x200?text=Sports+18" alt="Sports 18">
+                <img src="https://via.placeholder.com/150x200?text=Sports+18" alt="S18">
                 <div class="item-info">Sports 18</div>
             </div>
             <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=News+Channel" alt="News">
-                <div class="item-info">Aaj Tak Live</div>
+                <img src="https://via.placeholder.com/150x200?text=News+24" alt="News">
+                <div class="item-info">Aaj Tak</div>
             </div>
             <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=Free+Fire" alt="Gaming">
-                <div class="item-info">Ranjan Gaming</div>
+                <img src="https://via.placeholder.com/150x200?text=Ranjan+Gaming" alt="Gaming">
+                <div class="item-info">Ranjan Live</div>
             </div>
         </div>
     </div>
 
     <div class="bottom-nav">
         <a href="#" class="nav-link active"><i class="fas fa-home"></i>Home</a>
-        <a href="#" class="nav-link"><i class="fas fa-tv"></i>TV</a>
-        <a href="#" class="nav-link"><i class="fas fa-search"></i>Explore</a>
-        <a href="#" class="nav-link"><i class="fas fa-user"></i>My Space</a>
+        <a href="#" class="nav-link"><i class="fas fa-tv"></i>Live</a>
+        <a href="#" class="nav-link"><i class="fas fa-user"></i>Profile</a>
     </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+    </script>
 
 </body>
 </html>

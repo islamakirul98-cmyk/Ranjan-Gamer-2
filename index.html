@@ -1,26 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Hotstar Clone - Ranjan Gamer</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranjan Gamer Live - JioHotstar Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- Jio-Hotstar Dark Theme --- */
+        :root {
+            --main-blue: #0c111b; /* Deep Dark Blue */
+            --nav-blue: #141b29;  /* Navigation Blue */
+            --accent-blue: #1f80e0; /* Jio/Hotstar Blue */
+            --gold: #ffcc00;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-blue);
+            color: var(--white);
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 1. Header & Top Floor */
+        header {
+            background-color: var(--nav-blue);
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent-blue); /* Teri Blue Line */
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--accent-blue); }
+
+        /* 2. Banner / Slider Section */
+        .banner {
+            width: 90%;
+            height: 200px;
+            margin: 20px auto;
+            background: linear-gradient(to right, rgba(12,17,27,1), rgba(12,17,27,0)), url('https://via.placeholder.com/1000x400?text=IPL+LIVE+ON+RANJAN+GAMER'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .banner-content h2 { font-size: 24px; margin: 0; }
+        .banner-content p { color: #8894ab; font-size: 14px; }
+
+        /* 3. Categories (Jio Style) */
+        .tray-container {
+            padding: 10px 5%;
+        }
+
+        .tray-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tray-title a { color: var(--accent-blue); font-size: 12px; text-decoration: none; }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .item-card {
+            background: var(--nav-blue);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .item-card:hover {
+            transform: scale(1.05);
+            border: 2px solid var(--white);
+        }
+
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .live-tag {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: red;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .item-info {
+            padding: 8px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* 4. Footer Nav (Mobile App Look) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--nav-blue);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+
+        .nav-link {
+            color: #8894ab;
+            text-decoration: none;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .nav-link i { font-size: 20px; display: block; margin-bottom: 3px; }
+        .nav-link.active { color: var(--white); }
+
+    </style>
 </head>
 <body>
 
-  <header class="app-header">
-    <div class="logo">Ranjan Gamer</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">TV</a>
-      <a href="#">Movies</a>
-      <a href="#">Sports</a>
-      <a href="#">Premium</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">RANJAN <span>GAMER</span></div>
+        <div class="search"><i class="fas fa-search"></i></div>
+    </header>
 
-  <main>
-    <!-- yahan par carousel / movie cards aaenge -->
-  </main>
+    <div class="banner">
+        <div class="banner-content">
+            <h2>TATA IPL 2026</h2>
+            <p>Watch Live Match Free | No Lag</p>
+            <button style="background: var(--accent-blue); color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; font-weight: bold;">WATCH NOW</button>
+        </div>
+    </div>
+
+    <div class="tray-container">
+        <div class="tray-title">
+            <span>Popular Live Channels</span>
+            <a href="#">VIEW ALL</a>
+        </div>
+        
+        <div class="items-grid">
+            <div class="item-card">
+                <span class="live-tag">LIVE</span>
+                <img src="https://via.placeholder.com/150x200?text=Star+Sports" alt="Star Sports">
+                <div class="item-info">Star Sports 1</div>
+            </div>
+            <div class="item-card">
+                <span class="live-tag">LIVE</span>
+                <img src="https://via.placeholder.com/150x200?text=Sports+18" alt="Sports 18">
+                <div class="item-info">Sports 18</div>
+            </div>
+            <div class="item-card">
+                <img src="https://via.placeholder.com/150x200?text=News+Channel" alt="News">
+                <div class="item-info">Aaj Tak Live</div>
+            </div>
+            <div class="item-card">
+                <img src="https://via.placeholder.com/150x200?text=Free+Fire" alt="Gaming">
+                <div class="item-info">Ranjan Gaming</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-link active"><i class="fas fa-home"></i>Home</a>
+        <a href="#" class="nav-link"><i class="fas fa-tv"></i>TV</a>
+        <a href="#" class="nav-link"><i class="fas fa-search"></i>Explore</a>
+        <a href="#" class="nav-link"><i class="fas fa-user"></i>My Space</a>
+    </div>
 
 </body>
 </html>

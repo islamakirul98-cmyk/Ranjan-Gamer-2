@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer - Live Match</title>
+    <title>Ranjan Gamer - KKR vs MI Live</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
     <style>
         body { margin: 0; padding: 0; background-color: #0c111b; color: white; font-family: sans-serif; overflow-x: hidden; }
-        header { background: #141b29; padding: 15px; display: flex; justify-content: space-between; border-bottom: 3px solid #1f80e0; }
+        header { background: #141b29; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #1f80e0; }
         .brand { font-size: 20px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
 
@@ -17,30 +17,37 @@
         .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* Scorecard Container - Clean & Fixed */
-        .score-container {
-            margin: 12px; border-radius: 10px; overflow: hidden;
-            border: 2px solid #1f80e0; background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        /* --- REAL SCORECARD FIX --- */
+        .score-box {
+            margin: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff; /* White background taaki score saaf dikhe */
+            border: 2px solid #1f80e0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
         }
-        .score-frame { width: 100%; height: 210px; border: none; }
 
-        /* Chat System */
-        .chat-box { background: #141b29; margin: 10px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; }
-        #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; }
-        .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d; padding-bottom: 4px; }
+        /* Widget Container */
+        #cricket-score-widget { width: 100%; height: 100%; }
+
+        /* Fake Chat System */
+        .chat-box { background: #141b29; margin: 10px; border-radius: 8px; height: 250px; display: flex; flex-direction: column; }
+        #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; border-bottom: 1px solid #252e3f; }
+        .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d33; padding-bottom: 4px; }
         .user-name { color: #1f80e0; font-weight: bold; margin-right: 5px; }
 
-        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #252e3f; }
+        .chat-input-area { display: flex; padding: 10px; }
         #chat-input { flex: 1; background: #0c111b; border: 1px solid #333; color: white; padding: 10px; border-radius: 4px; outline: none; }
-        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 20px; margin-left: 8px; border-radius: 4px; font-weight: bold; }
+        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 20px; margin-left: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">RANJAN <span>GAMER</span></div>
-        <div style="color:red; font-size:13px; font-weight:bold;"><i class="fas fa-circle-dot"></i> LIVE MATCH</div>
+        <div style="color:red; font-size:12px; font-weight:bold;"><i class="fas fa-circle-dot"></i> LIVE MATCH</div>
     </header>
 
     <div class="player-container">
@@ -49,13 +56,13 @@
         </video>
     </div>
 
-    <div class="score-container">
-        <iframe src="https://m.cricbuzz.com/cricket-match-widget/live-score" class="score-frame"></iframe>
+    <div class="score-box">
+        <iframe src="https://m.cricbuzz.com/cricket-match-widget/live-score" style="width:100%; height:250px; border:none; background:white;"></iframe>
     </div>
 
     <div class="chat-box">
         <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> Match shuru ho chuka hai! Enjoy live stream.</div>
+            <div class="msg"><span class="user-name">Admin:</span> Match start ho gaya hai! Enjoy KKR vs MI.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-input" placeholder="Yahan comment karein...">
@@ -66,38 +73,35 @@
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         var player = videojs('my-video');
-
-        // Auto Landscape on Fullscreen Trigger
+        
+        // Auto Landscape on Fullscreen
         player.on('fullscreenchange', function() {
             if (player.isFullscreen()) {
                 if (screen.orientation && screen.orientation.lock) {
-                    screen.orientation.lock("landscape").catch(e => console.log("Landscape lock failed"));
+                    screen.orientation.lock("landscape").catch(e => {});
                 }
             }
         });
 
-        // Fake Chat Auto-Comments
-        const names = ["Ranjan_Fan_Gaya", "Bihari_Tigers", "Hitman_Lover", "IPL_Addict", "Gamer_Boy_Ranjan"];
-        const comments = ["Bhai kya solid stream hai!", "KKR ki batting khatarnak hai.", "MI comeback karegi bhai.", "Zero lag bro, maza aa gaya!", "Aaj kaun jitega?"];
+        // Fake Chat Comments Logic
+        const names = ["Ranjan_Fan_Gaya", "Bihari_Tigers", "Hitman_Lover", "IPL_Addict"];
+        const comments = ["KKR aaj jeetegi bhai!", "Rohit bhai ka jalwa aaj!", "Stream bilkul nahi atak rahi.", "Scorecard mast chal raha hai.", "OP Stream Ranjan bhai!"];
         
         setInterval(() => {
             const chatMessages = document.getElementById('chat-messages');
             const randomName = names[Math.floor(Math.random() * names.length)];
             const randomMsg = comments[Math.floor(Math.random() * comments.length)];
-            
             chatMessages.innerHTML += `<div class="msg"><span class="user-name">${randomName}:</span> ${randomMsg}</div>`;
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 9000);
+        }, 8000);
 
-        // User Chat Logic (With Random Name)
         document.getElementById('send-btn').onclick = function() {
             const input = document.getElementById('chat-input');
             if(input.value.trim() !== "") {
-                const userNames = ["Guest_User", "Viewer_X", "Cricket_Fan_Bihar"];
-                const name = userNames[Math.floor(Math.random() * userNames.length)];
+                const name = "User_" + Math.floor(Math.random()*99);
                 document.getElementById('chat-messages').innerHTML += `<div class="msg"><span class="user-name">${name}:</span> ${input.value}</div>`;
                 input.value = "";
-                document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+                document.getElementById('chat-messages').scrollTop = 9999;
             }
         };
     </script>

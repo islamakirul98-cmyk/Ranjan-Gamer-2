@@ -3,184 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer Live - Pro Theme</title>
+    <title>Ranjan Gamer - Live TV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- CSS Variables for Themes --- */
-        :root {
-            /* Default Dark Mode (Jio Style) */
-            --bg-body: #0c111b;
-            --bg-nav: #141b29;
-            --text-main: #ffffff;
-            --text-sub: #8894ab;
-            --accent-blue: #1f80e0;
-            --card-bg: #141b29;
-            --border-line: #1f80e0;
-        }
-
-        /* Light Mode Colors */
-        [data-theme="light"] {
-            --bg-body: #f0f2f5;
-            --bg-nav: #ffffff;
-            --text-main: #1c1e21;
-            --text-sub: #606770;
-            --accent-blue: #0056b3;
-            --card-bg: #ffffff;
-            --border-line: #0056b3;
-        }
-
+        /* --- Sabse Simple Dark Mode Style --- */
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: 'Roboto', sans-serif;
-            transition: all 0.3s ease;
-            overflow-x: hidden;
+            background-color: #0c111b; /* Asli Dark Blue Background */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 1. Header with Theme Toggle Logo */
+        /* Top Floor: Ranjan Gamer Name */
         header {
-            background-color: var(--bg-nav);
-            padding: 12px 5%;
+            background-color: #141b29;
+            padding: 15px 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--border-line);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #1f80e0; /* Teri Blue Line */
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-        .logo span { color: var(--accent-blue); }
-
-        /* Theme Toggle Icon */
-        #theme-toggle {
+        .brand-logo {
             font-size: 22px;
-            cursor: pointer;
-            color: var(--accent-blue);
-            transition: transform 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
         }
-        #theme-toggle:hover { transform: rotate(30deg); }
 
-        /* 2. Banner */
-        .banner {
+        .brand-logo span {
+            color: #1f80e0; /* Blue Color for Gamer */
+        }
+
+        /* Bada Poster Banner */
+        .main-banner {
             width: 90%;
             height: 180px;
             margin: 20px auto;
-            background: linear-gradient(45deg, var(--accent-blue), #000);
-            border-radius: 12px;
+            background: linear-gradient(to right, #1f80e0, #0c111b);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             padding: 20px;
-            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* 3. Grid & Cards */
-        .tray-container { padding: 10px 5%; }
-        .tray-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+        .banner-info h2 { margin: 0; font-size: 24px; }
+        .banner-info p { margin: 5px 0; color: #a0a0a0; }
 
-        .items-grid {
+        /* News Channel Style List */
+        .section {
+            padding: 10px 5% 100px 5%;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #1f80e0;
+        }
+
+        .channel-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 15px;
         }
 
-        .item-card {
-            background: var(--card-bg);
-            border-radius: 10px;
+        .channel-card {
+            background: #141b29;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(128,128,128,0.2);
+            text-align: center;
             transition: 0.3s;
+            border: 1px solid #1f80e033;
+            cursor: pointer;
         }
-        .item-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
 
-        .item-card img { width: 100%; height: 160px; object-fit: cover; }
-        .item-info { padding: 8px; font-size: 14px; text-align: center; }
+        .channel-card:hover {
+            border-color: #1f80e0;
+            transform: scale(1.05);
+        }
 
-        /* 4. Bottom Nav (App Feel) */
+        .channel-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .channel-name {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Bottom App Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: var(--bg-nav);
+            background: #141b29;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid rgba(128,128,128,0.2);
+            padding: 12px 0;
+            border-top: 1px solid #252e3f;
         }
-        .nav-link { color: var(--text-sub); text-decoration: none; font-size: 10px; text-align: center; }
-        .nav-link.active { color: var(--accent-blue); }
-        .nav-link i { font-size: 20px; display: block; }
+
+        .nav-item {
+            color: #8894ab;
+            text-decoration: none;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
+        .nav-item.active { color: #ffffff; }
 
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">RANJAN <span>GAMER</span></div>
-        <div id="theme-toggle">
-            <i class="fas fa-moon" id="theme-icon"></i>
-        </div>
+        <div class="brand-logo">RANJAN <span>GAMER</span></div>
+        <div class="menu"><i class="fas fa-bars"></i></div>
     </header>
 
-    <div class="banner">
-        <div>
-            <h2 style="margin:0">IPL 2026 LIVE</h2>
-            <p style="font-size:14px">High Quality | Low Data</p>
+    <div class="main-banner">
+        <div class="banner-info">
+            <h2>IPL 2026 LIVE</h2>
+            <p>Ranjan Gamer Special Streaming</p>
         </div>
     </div>
 
-    <div class="tray-container">
-        <div class="tray-title">Live Channels</div>
-        <div class="items-grid">
-            <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=Star+Sports" alt="Star">
-                <div class="item-info">Star Sports 1</div>
+    <div class="section">
+        <div class="section-title">LIVE CHANNELS</div>
+        <div class="channel-grid">
+            <div class="channel-card">
+                <img src="https://via.placeholder.com/150x200?text=Star+Sports" alt="Star Sports">
+                <div class="channel-name">Star Sports 1</div>
             </div>
-            <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=Sports+18" alt="S18">
-                <div class="item-info">Sports 18</div>
+            <div class="channel-card">
+                <img src="https://via.placeholder.com/150x200?text=Sports+18" alt="Sports 18">
+                <div class="channel-name">Sports 18</div>
             </div>
-            <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=News+24" alt="News">
-                <div class="item-info">Aaj Tak</div>
+            <div class="channel-card">
+                <img src="https://via.placeholder.com/150x200?text=Aaj+Tak" alt="Aaj Tak">
+                <div class="channel-name">Aaj Tak News</div>
             </div>
-            <div class="item-card">
-                <img src="https://via.placeholder.com/150x200?text=Ranjan+Gaming" alt="Gaming">
-                <div class="item-info">Ranjan Live</div>
+            <div class="channel-card">
+                <img src="https://via.placeholder.com/150x200?text=Gaming" alt="Gaming">
+                <div class="channel-name">Ranjan Gaming</div>
             </div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="#" class="nav-link active"><i class="fas fa-home"></i>Home</a>
-        <a href="#" class="nav-link"><i class="fas fa-tv"></i>Live</a>
-        <a href="#" class="nav-link"><i class="fas fa-user"></i>Profile</a>
+        <a href="#" class="nav-item active"><i class="fas fa-home"></i>Home</a>
+        <a href="#" class="nav-item"><i class="fas fa-play-circle"></i>Live</a>
+        <a href="#" class="nav-item"><i class="fas fa-user"></i>Profile</a>
     </div>
-
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'light') {
-                body.removeAttribute('data-theme');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            }
-        });
-    </script>
 
 </body>
 </html>

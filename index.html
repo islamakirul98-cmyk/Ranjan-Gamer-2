@@ -3,54 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer - KKR vs SRH Live</title>
+    <title>Ranjan Gamer Live</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
     <style>
-        body { margin: 0; padding: 0; background-color: #0c111b; color: white; font-family: sans-serif; overflow-x: hidden; }
-        header { background: #141b29; padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 3px solid #1f80e0; }
-        .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
+        /* --- ASLI DARK THEME (HOTSTAR STYLE) --- */
+        body { margin: 0; padding: 0; background-color: #0c111b; color: #ffffff; font-family: sans-serif; overflow-x: hidden; }
+        
+        header { 
+            background: #141b29; padding: 12px 15px; display: flex; 
+            justify-content: space-between; align-items: center; 
+            border-bottom: 2px solid #1f80e0;
+        }
+        .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .brand span { color: #1f80e0; }
 
-        /* Video Player */
-        .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; position: relative; }
+        /* Video Player Area */
+        .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* --- CREX CROP JUGAAD (Hide Banner) --- */
-        .score-outer-wrapper {
+        /* --- SCORECARD CROP & DARK MODE JUGAAD --- */
+        .score-wrapper {
             width: 100%;
-            height: 450px; /* Scorecard ki height */
-            overflow: hidden; /* Banner hide karne ke liye */
+            height: 400px; /* Aapke mobile screen ke hisab se */
+            overflow: hidden;
             position: relative;
-            background: #fff;
-            border-top: 2px solid #1f80e0;
+            background: #0c111b;
+            border-top: 1px solid #252e3f;
         }
 
-        .score-inner-frame {
+        .score-frame {
             width: 100%;
-            height: 600px; 
+            height: 600px;
             position: absolute;
-            top: -70px; /* Isse upar ka banner hide ho jayega (Adjust if needed) */
+            top: -55px; /* Upar ka banner crop karne ke liye */
             border: none;
+            /* YAHAN SE DARK MODE HOGA */
+            filter: invert(90%) hue-rotate(180deg); 
+            /* Ye white page ko dark blueish-black bana dega */
         }
 
-        /* Fake Chat Area */
-        .chat-box { background: #141b29; margin: 15px 10px; border-radius: 8px; height: 200px; display: flex; flex-direction: column; border: 1px solid #252e3f; }
+        /* Fake Chat System */
+        .chat-box { background: #141b29; margin: 15px 10px; border-radius: 8px; height: 180px; display: flex; flex-direction: column; }
         #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 12px; }
-        .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d33; padding-bottom: 4px; }
+        .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d; padding-bottom: 4px; }
         .user-name { color: #1f80e0; font-weight: bold; }
-
-        .chat-input-area { display: flex; padding: 10px; background: #1a2233; }
+        
+        .chat-input-area { display: flex; padding: 10px; background: #141b29; border-top: 1px solid #252e3f; }
         #chat-input { flex: 1; background: #0c111b; border: 1px solid #333; color: white; padding: 8px; border-radius: 4px; outline: none; }
-        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 15px; margin-left: 5px; border-radius: 4px; cursor: pointer; }
+        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 15px; margin-left: 5px; border-radius: 4px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">RANJAN <span>GAMER</span></div>
-        <div style="background:red; padding:2px 8px; border-radius:4px; font-size:10px;">IPL 2026 LIVE</div>
+        <div style="background:red; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:bold;">LIVE</div>
     </header>
 
     <div class="player-container">
@@ -59,13 +68,13 @@
         </video>
     </div>
 
-    <div class="score-outer-wrapper">
-        <iframe src="https://crex.com/cricket-live-score/kkr-vs-srh-6th-match-indian-premier-league-2026-match-updates-10Y4" class="score-inner-frame"></iframe>
+    <div class="score-wrapper">
+        <iframe src="https://crex.com/cricket-live-score/kkr-vs-srh-6th-match-indian-premier-league-2026-match-updates-10Y4" class="score-frame"></iframe>
     </div>
 
     <div class="chat-box">
         <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> KKR vs SRH Match Updates added below!</div>
+            <div class="msg"><span class="user-name">Admin:</span> Welcome back Ranjan Gamer! Enjoy the match in Dark Mode.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-input" placeholder="Type here...">
@@ -83,9 +92,9 @@
         });
 
         // Fake Chat logic
-        const names = ["Ranjan_Fan", "Bihari_Hero", "IPL_Expert"];
+        const names = ["Ranjan_Fans", "Bihari_Tigers", "IPL_Lovers"];
         setInterval(() => {
-            const m = `<div class="msg"><span class="user-name">${names[Math.floor(Math.random()*3)]}:</span> Match ka scorecard mast hai!</div>`;
+            const m = `<div class="msg"><span class="user-name">${names[Math.floor(Math.random()*3)]}:</span> Dark Mode mast lag raha hai bhai!</div>`;
             document.getElementById('chat-messages').innerHTML += m;
             document.getElementById('chat-messages').scrollTop = 9999;
         }, 12000);

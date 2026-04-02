@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer Live</title>
+    <title>Ranjan Gamer Live - KKR vs SRH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
     <style>
-        /* --- ASLI HOTSTAR DARK THEME --- */
+        /* --- Dark Theme Background --- */
         body { margin: 0; padding: 0; background-color: #0c111b; color: #ffffff; font-family: sans-serif; overflow-x: hidden; }
         
         header { 
@@ -19,31 +19,28 @@
         .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
 
+        /* Video Player Area */
         .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* --- CLEAN SCORECARD (NO GHOST EFFECT) --- */
-        .score-wrapper {
+        /* --- FULL SCORECARD (NO CROP) --- */
+        .score-container {
             width: 100%;
-            height: 480px; /* Thoda bada kiya hai taaki scorecard sahi dikhe */
-            overflow: hidden;
-            position: relative;
-            background: #f0f2f5; /* Light grey background for scorecard only */
+            height: 600px; /* Full page dikhane ke liye height badha di hai */
+            background: #fff; /* Scorecard white hi rahega jaisa asli hai */
             border-top: 2px solid #1f80e0;
-            margin-bottom: 10px;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .score-frame {
             width: 100%;
-            height: 700px;
-            position: absolute;
-            top: -55px; /* Banner crop logic */
+            height: 100%;
             border: none;
-            /* Filter hata diya hai taaki players real dikhein */
         }
 
         /* Fake Chat System */
-        .chat-box { background: #141b29; margin: 15px 10px; border-radius: 8px; height: 200px; display: flex; flex-direction: column; }
+        .chat-box { background: #141b29; margin: 15px 10px; border-radius: 8px; height: 180px; display: flex; flex-direction: column; }
         #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 12px; }
         .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d; padding-bottom: 4px; }
         .user-name { color: #1f80e0; font-weight: bold; }
@@ -57,7 +54,7 @@
 
     <header>
         <div class="brand">RANJAN <span>GAMER</span></div>
-        <div style="background:red; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:bold;">LIVE</div>
+        <div style="background:red; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:bold;">IPL 2026 LIVE</div>
     </header>
 
     <div class="player-container">
@@ -66,13 +63,13 @@
         </video>
     </div>
 
-    <div class="score-wrapper">
+    <div class="score-container">
         <iframe src="https://crex.com/cricket-live-score/kkr-vs-srh-6th-match-indian-premier-league-2026-match-updates-10Y4" class="score-frame"></iframe>
     </div>
 
     <div class="chat-box">
         <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> Match updates fixed. No ghost players now!</div>
+            <div class="msg"><span class="user-name">Admin:</span> KKR vs SRH Live! Scorecard added below.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-input" placeholder="Type here...">

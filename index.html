@@ -3,47 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer - Live Match & Crex</title>
+    <title>Ranjan Gamer - KKR vs SRH Live</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
     <style>
         body { margin: 0; padding: 0; background-color: #0c111b; color: white; font-family: sans-serif; overflow-x: hidden; }
-        
-        header { 
-            background: #141b29; padding: 12px 15px; display: flex; 
-            justify-content: space-between; align-items: center; border-bottom: 3px solid #1f80e0; 
-        }
+        header { background: #141b29; padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 3px solid #1f80e0; }
         .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
 
-        /* Video Player Section */
+        /* Video Player */
         .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; position: relative; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* --- CREX.COM SECTION --- */
-        .crex-header { background: #1f80e0; padding: 5px 15px; font-size: 12px; font-weight: bold; text-align: center; }
-        .crex-container {
+        /* --- CREX CROP JUGAAD (Hide Banner) --- */
+        .score-outer-wrapper {
             width: 100%;
-            height: 600px; /* Is height ko aap badha sakte ho */
+            height: 450px; /* Scorecard ki height */
+            overflow: hidden; /* Banner hide karne ke liye */
+            position: relative;
             background: #fff;
-            overflow: hidden;
-            -webkit-overflow-scrolling: touch;
+            border-top: 2px solid #1f80e0;
         }
-        
-        .crex-frame {
+
+        .score-inner-frame {
             width: 100%;
-            height: 100%;
+            height: 600px; 
+            position: absolute;
+            top: -70px; /* Isse upar ka banner hide ho jayega (Adjust if needed) */
             border: none;
         }
 
-        /* Fake Chat (Below Crex) */
+        /* Fake Chat Area */
         .chat-box { background: #141b29; margin: 15px 10px; border-radius: 8px; height: 200px; display: flex; flex-direction: column; border: 1px solid #252e3f; }
         #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 12px; }
         .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d33; padding-bottom: 4px; }
         .user-name { color: #1f80e0; font-weight: bold; }
 
-        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #252e3f; background: #1a2233; }
+        .chat-input-area { display: flex; padding: 10px; background: #1a2233; }
         #chat-input { flex: 1; background: #0c111b; border: 1px solid #333; color: white; padding: 8px; border-radius: 4px; outline: none; }
         #send-btn { background: #1f80e0; border: none; color: white; padding: 0 15px; margin-left: 5px; border-radius: 4px; cursor: pointer; }
     </style>
@@ -52,7 +50,7 @@
 
     <header>
         <div class="brand">RANJAN <span>GAMER</span></div>
-        <div style="background:red; padding:2px 8px; border-radius:4px; font-size:10px;">LIVE</div>
+        <div style="background:red; padding:2px 8px; border-radius:4px; font-size:10px;">IPL 2026 LIVE</div>
     </header>
 
     <div class="player-container">
@@ -61,17 +59,16 @@
         </video>
     </div>
 
-    <div class="crex-header"><i class="fas fa-trophy"></i> CREX LIVE SCORECARD</div>
-    <div class="crex-container">
-        <iframe src="https://crex.com/" class="crex-frame"></iframe>
+    <div class="score-outer-wrapper">
+        <iframe src="https://crex.com/cricket-live-score/kkr-vs-srh-6th-match-indian-premier-league-2026-match-updates-10Y4" class="score-inner-frame"></iframe>
     </div>
 
     <div class="chat-box">
         <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> Enjoy live action with Crex Scorecard!</div>
+            <div class="msg"><span class="user-name">Admin:</span> KKR vs SRH Match Updates added below!</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Yahan comment karein...">
+            <input type="text" id="chat-input" placeholder="Type here...">
             <button id="send-btn">Send</button>
         </div>
     </div>
@@ -79,8 +76,6 @@
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         var player = videojs('my-video');
-
-        // Fullscreen Landscape Logic
         player.on('fullscreenchange', function() {
             if (player.isFullscreen() && screen.orientation) {
                 screen.orientation.lock("landscape").catch(e => {});
@@ -88,9 +83,9 @@
         });
 
         // Fake Chat logic
-        const names = ["Ranjan_Fans", "Bihari_Power", "Crick_Guru"];
+        const names = ["Ranjan_Fan", "Bihari_Hero", "IPL_Expert"];
         setInterval(() => {
-            const m = `<div class="msg"><span class="user-name">${names[Math.floor(Math.random()*3)]}:</span> Mast chal raha hai bhai!</div>`;
+            const m = `<div class="msg"><span class="user-name">${names[Math.floor(Math.random()*3)]}:</span> Match ka scorecard mast hai!</div>`;
             document.getElementById('chat-messages').innerHTML += m;
             document.getElementById('chat-messages').scrollTop = 9999;
         }, 12000);

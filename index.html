@@ -8,45 +8,52 @@
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
     <style>
-        body { margin: 0; padding: 0; background-color: #0c111b; color: #ffffff; font-family: sans-serif; overflow-x: hidden; }
-        header { background: #141b29; padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 2px solid #1f80e0; }
+        body { margin: 0; padding: 0; background-color: #0f1014; color: #ffffff; font-family: sans-serif; overflow-x: hidden; }
+        
+        header { background: #0f1014; padding: 12px 15px; border-bottom: 1px solid #252833; }
         .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
 
+        /* Video Player */
         .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* --- ONLY SCORE BANNER CROP --- */
-        .score-only-wrapper {
-            width: 100%;
-            height: 140px; /* Sirf banner ki height */
-            overflow: hidden;
-            position: relative;
-            background: #fff;
-            border-top: 2px solid #1f80e0;
-            margin-bottom: 5px;
-        }
+        /* Title Area */
+        .match-info-bar { padding: 12px 15px; background: #0f1014; }
+        .title-text { font-size: 18px; font-weight: bold; }
+        .sub-text { font-size: 12px; color: #8f98b2; margin-top: 3px; }
 
-        .score-frame {
-            width: 100%;
-            height: 1000px;
-            position: absolute;
-            top: -165px; /* Isse upar ka banner aur niche ki info dono gayab */
-            border: none;
+        /* --- TABS SYSTEM --- */
+        .tabs-bar { display: flex; background: #16181f; border-bottom: 1px solid #252833; }
+        .tab-item { 
+            flex: 1; padding: 12px 0; text-align: center; 
+            font-size: 14px; font-weight: bold; color: #8f98b2; 
+            cursor: pointer; border-bottom: 3px solid transparent; 
         }
+        .tab-item.active { color: #ffffff; border-bottom: 3px solid #1f80e0; }
 
-        /* Fake Chat */
-        .chat-box { background: #141b29; margin: 10px; border-radius: 8px; height: 200px; display: flex; flex-direction: column; border: 1px solid #252e3f; }
-        #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 12px; }
-        .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d; padding-bottom: 4px; }
-        .user-name { color: #1f80e0; font-weight: bold; }
+        /* Content Sections */
+        .tab-content { display: none; width: 100%; }
+        .tab-content.active { display: block; }
+
+        /* 1st Interface: Scorecard (Direct Link) */
+        .score-frame { width: 100%; height: 600px; border: none; background: #fff; }
+
+        /* 2nd Interface: Commentary / Chat */
+        .chat-section { background: #0f1014; height: 450px; display: flex; flex-direction: column; }
+        #chat-display { flex: 1; overflow-y: auto; padding: 15px; }
+        .chat-msg { margin-bottom: 10px; background: #1a1c24; padding: 10px; border-radius: 6px; font-size: 13px; border-left: 3px solid #1f80e0; }
+        .u-name { font-weight: bold; color: #1f80e0; margin-right: 5px; }
+
+        .input-bar { display: flex; padding: 10px; background: #16181f; border-top: 1px solid #252833; }
+        #user-input { flex: 1; background: #0f1014; border: 1px solid #323645; color: white; padding: 10px; border-radius: 4px; outline: none; }
+        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 15px; margin-left: 8px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">RANJAN <span>GAMER</span></div>
-        <div style="background:red; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:bold;">LIVE</div>
     </header>
 
     <div class="player-container">
@@ -55,24 +62,55 @@
         </video>
     </div>
 
-    <div class="score-only-wrapper">
+    <div class="match-info-bar">
+        <div class="title-text">CSK vs PBKS</div>
+        <div class="sub-text">TATA IPL 2026 | LIVE FROM MA CHIDAMBARAM STADIUM</div>
+    </div>
+
+    <div class="tabs-bar">
+        <div class="tab-item active" onclick="switchTab(event, 'score-tab')">SCORECARD</div>
+        <div class="tab-item" onclick="switchTab(event, 'comment-tab')">COMMENTARY</div>
+    </div>
+
+    <div id="score-tab" class="tab-content active">
         <iframe src="https://crex.com/cricket-live-score/csk-vs-pbks-7th-match-indian-premier-league-2026-match-updates-10Y5" class="score-frame"></iframe>
     </div>
 
-    <div class="chat-box">
-        <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> Only Score Banner Fixed! Match starts at 7:30 PM.</div>
+    <div id="comment-tab" class="tab-content">
+        <div class="chat-section">
+            <div id="chat-display">
+                <div class="chat-msg"><span class="u-name">System:</span> Live Commentary started. Toss updates soon!</div>
+            </div>
+            <div class="input-bar">
+                <input type="text" id="user-input" placeholder="Type a comment...">
+                <button id="send-btn">Send</button>
+            </div>
         </div>
     </div>
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         var player = videojs('my-video');
-        player.on('fullscreenchange', function() {
-            if (player.isFullscreen() && screen.orientation) {
-                screen.orientation.lock("landscape").catch(e => {});
+
+        // Tab Switching Logic
+        function switchTab(evt, tabId) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = "none";
             }
-        });
+            var tabs = document.getElementsByClassName("tab-item");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabId).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Auto-scroll chat to bottom
+        setInterval(() => {
+            const chatDisp = document.getElementById('chat-display');
+            chatDisp.scrollTop = chatDisp.scrollHeight;
+        }, 1000);
     </script>
 </body>
 </html>

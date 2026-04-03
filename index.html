@@ -9,37 +9,42 @@
     
     <style>
         body { margin: 0; padding: 0; background-color: #0c111b; color: #ffffff; font-family: sans-serif; overflow-x: hidden; }
-        header { background: #141b29; padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 2px solid #1f80e0; }
+        header { background: #141b29; padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 3px solid #1f80e0; }
         .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
 
-        /* Video Player Area */
-        .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; }
+        .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; position: relative; }
         .video-js { width: 100% !important; height: auto; aspect-ratio: 16/9; }
 
-        /* --- PERFECT SCORE CROP (MATCH START HONE PAR) --- */
+        /* --- SCORE BANNER SYSTEM --- */
         .score-box {
             width: 100%;
-            height: 250px; /* Height kam rakhi hai taaki match info niche chhip jaye */
+            height: 120px; /* Is height se niche ka "Match Info" cut jayega */
             overflow: hidden;
             position: relative;
             background: #fff;
             border-top: 2px solid #1f80e0;
+            margin-bottom: 5px;
         }
 
-        .score-frame {
+        /* Using static image for layout from image_3.png */
+        .score-image {
             width: 100%;
-            height: 1000px;
+            height: auto;
             position: absolute;
-            top: -250px; /* Isse Crex ka upar ka match info aur banner dono saaf ho jayenge */
+            top: 0;
             border: none;
         }
 
-        /* Fake Chat */
-        .chat-box { background: #141b29; margin: 10px; border-radius: 8px; height: 150px; display: flex; flex-direction: column; border: 1px solid #252e3f; }
+        /* Fake Chat System */
+        .chat-box { background: #141b29; margin: 10px; border-radius: 8px; height: 180px; display: flex; flex-direction: column; border: 1px solid #252e3f; }
         #chat-messages { flex: 1; overflow-y: auto; padding: 10px; font-size: 12px; }
         .msg { margin-bottom: 8px; border-bottom: 1px solid #1f2a3d; padding-bottom: 4px; }
         .user-name { color: #1f80e0; font-weight: bold; }
+        
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #252e3f; }
+        #chat-input { flex: 1; background: #0c111b; border: 1px solid #333; color: white; padding: 8px; border-radius: 4px; outline: none; }
+        #send-btn { background: #1f80e0; border: none; color: white; padding: 0 15px; margin-left: 5px; border-radius: 4px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -51,17 +56,21 @@
 
     <div class="player-container">
         <video id="my-video" class="video-js vjs-big-play-centered" controls preload="auto">
-            <source src="https://linear-241.voot.com/voot/1/1/1/1/1677651842/master_Layer7.m3u8" type="application/x-mpegURL">
+            <source src="https://aps32.playlist.live-video.net/v1/playlist/CvAFT5sFYQWvziIVvWf4-qcMacUMy3GzyEjnulSbxLBnjXdZTSx6KntHxkwomZo9EOhEYVp0a2-VXRHLmrmU11bgjz3YPKsSxIk247-9nTIWTTQQXWtlAw1fNE-Wrx6LsG7xUcnmoVuS49JXJY6n4qCF-_BGlIvofAQTn5PLCWT7umJxckEkPDht0ZuyBTliN2qFM3_LEnKG95jfwlz7brOozkD06zYsyJq7YlH-kZUiUPcn1Tscoe3b_0AQwbVaC40Y-8wGzHJltWE3YSQ-ZeQQqdfrQxT4VWzJ6CeHYowpm8bNpZ0EeOtz5Tr8S9Hbt4qWmwYHpIk4VqCVH5n0cGSau0zyYKB5jwS6eFxdaagrBOtIux3DaqMURTPiWPIt8SJs7yRcGa2flV78UOUNX1n5KEIHsj6io-1q43bvFSe4THm1L-3mcrXBB1Pqi0Si-Lozs6FU0pbfFKzSfRAOqz4VkejJfHBoy_QJPoLnjwf21iORiUIS3MqyvcMVdFR-2Dh_xPx1l3oCeAJQfuXoTw4Epo_KHj-T9glvKpHpJaWE9tK5hmb9jQrbVeci4lII8djNavpfW7dkWn20q_bUio329Ysd2kCsiAGzjiHvFaj7aEntvBjBDJ1qp5PUaLAtiSaLUTH2sXH_e9_t78-SSIunv8VrZB0hYchvNqwiAzGTymEMLFCCbqGjHPBbpFgjX27vJhTVwDonvM9pkajNloR0qp_jPqaP1puus8SUSgbzsoLIdkrx6Oy3IEqLMk2pHR5S9mriPw64JD9Gm9HvKkQnI78XW15JyX59nqxtvTOASxUEh0li-1xO7Gnnxa1KO4sftXMlmncIMpSaZsjmmwVH2XIg_f1fMjPkugbJmudvKDcDK9Qax3VsHd3pY1iVf9f6ElF9xTCdvd11rIpYtU8pzbCf-_h3ZfUhlHiqJS9G06BsUcko5hMYam7W5eN3HGGmwQfSw-pu69dd4QkfPzKiIRpmOyFbACb_50qGTpQ8GOMaDPTc-5cROSR8OuCM8iABKgl1cy13ZXN0LTIw4Q4.m3u8" type="application/x-mpegURL">
         </video>
     </div>
 
     <div class="score-box">
-        <iframe src="https://crex.com/cricket-live-score/csk-vs-pbks-7th-match-indian-premier-league-2026-match-updates-10Y5" class="score-frame"></iframe>
+        <img src="image_3.png" class="score-image" alt="CSK vs PBKS Score Banner">
     </div>
 
     <div class="chat-box">
         <div id="chat-messages">
-            <div class="msg"><span class="user-name">Admin:</span> Match 7:30 baje shuru hoga. Tab tak score yahan apne aap aa jayega!</div>
+            <div class="msg"><span class="user-name">Admin:</span> Layout updated. Real score banner is here!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type here...">
+            <button id="send-btn">Send</button>
         </div>
     </div>
 
@@ -73,6 +82,28 @@
                 screen.orientation.lock("landscape").catch(e => {});
             }
         });
+
+        // Fake Chat logic
+        const names = ["Ranjan_Fans", "Bihari_Power", "Hitman_MI", "KKR_Boy", "IPL_Lover"];
+        const comments = ["Bhai kya smooth stream hai!", "Afsos KKR haar gayi, par layout mast hai.", "Hitman better. Punjab support karo.", "OP Layout Ranjan bhai!", "Final layout fixed!"];
+        
+        setInterval(() => {
+            const chatMessages = document.getElementById('chat-messages');
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomMsg = comments[Math.floor(Math.random() * comments.length)];
+            chatMessages.innerHTML += `<div class="msg"><span class="user-name">${randomName}:</span> ${randomMsg}</div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 9000);
+
+        document.getElementById('send-btn').onclick = function() {
+            const input = document.getElementById('chat-input');
+            if(input.value.trim() !== "") {
+                const name = "Viewer_" + Math.floor(Math.random()*99);
+                document.getElementById('chat-messages').innerHTML += `<div class="msg"><span class="user-name">${name}:</span> ${input.value}</div>`;
+                input.value = "";
+                document.getElementById('chat-messages').scrollTop = 9999;
+            }
+        };
     </script>
 </body>
 </html>

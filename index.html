@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjan Gamer Live</title>
+    <title>Bluestar Sport Live</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     
@@ -12,6 +12,53 @@
         header { background: #0f1014; padding: 12px 15px; border-bottom: 1px solid #252833; }
         .brand { font-size: 18px; font-weight: bold; text-transform: uppercase; }
         .brand span { color: #1f80e0; }
+
+        /* ====== 1. VIDEO INTRO OVERLAY ====== */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999; /* Player se bhi upar rakhne ke liye */
+            cursor: pointer;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        #click-prompt {
+            color: #00a2ff;
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: absolute;
+            z-index: 100000;
+            animation: blink 1.2s infinite;
+            text-shadow: 0 0 10px #00a2ff;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid #00a2ff;
+        }
+
+        #intro-overlay video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .hide-intro {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
 
         /* Video Player Section */
         .player-container { width: 100%; max-width: 900px; margin: 0 auto; background: #000; position: relative; }
@@ -36,15 +83,14 @@
             width: 100% !important; height: 100% !important;
             border-radius: 50% !important;
             border: 5px solid transparent !important;
-            /* Multi-color Gradient Border */
-            border-top-color: #ff0055 !important; /* Pink/Red */
-            border-bottom-color: #00e5ff !important; /* Cyan */
+            border-top-color: #ff0055 !important;
+            border-bottom-color: #00e5ff !important;
             animation: vjs-spinner-spin 1s linear infinite !important;
         }
 
         .vjs-loading-spinner:after {
-            border-top-color: #72ff00 !important; /* Neon Green */
-            border-bottom-color: #ffb300 !important; /* Golden */
+            border-top-color: #72ff00 !important;
+            border-bottom-color: #ffb300 !important;
             animation: vjs-spinner-spin 1.5s linear reverse infinite !important;
         }
 
@@ -70,8 +116,21 @@
 </head>
 <body>
 
+    <!-- 1. INTRO VIDEO OVERLAY -->
+    <div id="intro-overlay" onclick="playIntroVideo()">
+        <div id="click-prompt">👉 TAP TO START INTRO 👈</div>
+        
+        <!-- Aapki original video file -->
+        <video id="intro-video" playsinline preload="auto">
+            <source src="1000045993.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- 2. MAIN WEBSITE CONTENT -->
     <header>
-        <div class="brand">RANJAN <span>GAMER</span></div>
+        <!-- Naam बदलकर Bluestar Sport kar diya -->
+        <div class="brand">BLUESTAR <span>SPORT</span></div>
     </header>
 
     <div class="player-container">
@@ -109,6 +168,42 @@
             document.getElementById(tabId).style.display = "block";
             evt.currentTarget.classList.add("active");
         }
+
+        // ====== JAVASCRIPT FOR INTRO OVERLAY ======
+        const introVideo = document.getElementById('intro-video');
+        const introOverlay = document.getElementById('intro-overlay');
+        const clickPrompt = document.getElementById('click-prompt');
+        let introStarted = false;
+
+        function playIntroVideo() {
+            if (introStarted) return;
+            introStarted = true;
+
+            clickPrompt.style.display = 'none';
+            introVideo.style.display = 'block';
+
+            introVideo.muted = false; // Original video sound play hoga
+            introVideo.play().catch(error => {
+                console.log("Intro video block bypass: ", error);
+                removeIntroOverlay();
+            });
+        }
+
+        function removeIntroOverlay() {
+            introOverlay.classList.add('hide-intro');
+        }
+
+        // Video khatam hote hi overlay hatega
+        introVideo.onended = function() {
+            removeIntroOverlay();
+        };
+
+        // Safety net (Bypass)
+        setTimeout(() => {
+            if (!introOverlay.classList.contains('hide-intro')) {
+                removeIntroOverlay();
+            }
+        }, 10000);
     </script>
 </body>
 </html>

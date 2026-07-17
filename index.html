@@ -1,56 +1,563 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<style>
-    body { font-family: 'Arial', sans-serif; display: flex; justify-content: center; background-color: #f0f0f0; }
-    .poster {
-        width: 400px; border: 10px solid #ffd700; background: white;
-        text-align: center; position: relative; overflow: hidden;
-    }
-    .header { background-color: #004d40; color: #ccff00; padding: 15px; font-weight: bold; }
-    .title { color: #800000; font-size: 24px; margin-top: 10px; font-weight: bold; }
-    .post-box { background: #d32f2f; color: white; display: inline-block; padding: 5px 20px; border-radius: 5px; font-size: 20px; }
-    .panchayat { background: #0288d1; color: white; padding: 5px 30px; border-radius: 20px; display: inline-block; margin: 10px 0; }
-    .details { text-align: left; padding-left: 20px; color: #000; font-weight: bold; line-height: 1.6; }
-    .yuva { background: #d32f2f; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; font-size: 18px; }
-    .footer { background: #004d40; color: white; padding: 10px; margin-top: 20px; font-size: 14px; }
-    .candidate-img { width: 180px; position: absolute; bottom: 40px; right: 10px; }
-    .mission { background: #0d47a1; color: white; width: 150px; padding: 5px; border-radius: 10px 0 0 10px; position: absolute; bottom: 65px; left: 100px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Site for Mobiles, Electronics, Apparel & More | Flipkart Clone</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://img1a.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="poster">
-    <div class="header">
-        ● आप करोगे समर्थन <br> हम करेंगे परिवर्तन ●
-    </div>
-    
-    <div class="title">नई सोच नया उम्मीदवार</div>
-    <div class="post-box">मुखिया पद प्रत्याशी</div>
-    
-    <br>
-    <div class="panchayat">पंचायत बिलारी</div>
-    
-    <div class="details">
-        <p style="color: #fbc02d;">संघर्षशील कर्मठ</p>
-        <p style="color: #388e3c;">सुख दुःख के साथी</p>
-        <p style="color: #0288d1;">अपने बेटे अपने भाई</p>
-        <p style="font-size: 22px;">ईमानदार</p>
+    <!-- TOP MODE SWITCHER BAR -->
+    <div class="top-mode-bar">
+        <div class="mode-tab active" id="mode-flipkart" onclick="app.switchMode('flipkart')">
+            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png" alt="Flipkart Logo" class="mode-tab-logo">
+        </div>
+        <div class="mode-tab" id="mode-minutes" onclick="app.switchMode('minutes')">
+            <span class="minutes-logo-text"><i class="fa-solid fa-bolt"></i> minutes</span>
+            <span class="minutes-badge">10 MINS</span>
+        </div>
     </div>
 
-    <div class="yuva">युवा प्रत्याशी</div>
-    
-    <div class="mission">मिशन 2026</div>
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="logo-container" onclick="app.navigateTo('home')">
+                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png" alt="Flipkart Logo" class="logo-img" id="header-logo-img">
+                <a class="explore-plus" id="explore-plus-container">Explore <span class="plus-text">Plus <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png" alt="plus star" class="plus-star"></span></a>
+            </div>
 
-    <!-- उम्मीदवार का नाम -->
-    <div style="position: absolute; bottom: 50px; right: 20px; color: #d32f2f; font-weight: bold;">
-        सच्चिदानन्द कुमार <br> <span style="font-size: 14px;">उर्फ बिट्टू कुमार</span>
+            <!-- Deliver To Location Bar -->
+            <div class="location-selector-container" onclick="app.toggleLocationPopup()">
+                <i class="fa-solid fa-location-dot location-pin"></i>
+                <div class="location-text">
+                    <span class="loc-label">Deliver to</span>
+                    <span class="loc-value" id="header-pincode">New Delhi 110001</span>
+                </div>
+                <i class="fa-solid fa-angle-down loc-arrow"></i>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search for products, brands and more" autocomplete="off">
+                    <i class="fa-solid fa-microphone voice-search-icon" onclick="alert('Voice search listening... Speak now!')"></i>
+                    <i class="fa-solid fa-camera camera-search-icon" onclick="alert('Camera search activated! Choose photo to upload.')"></i>
+                    <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <!-- Search Suggestions Dropdown -->
+                <div id="search-suggestions" class="search-suggestions hidden">
+                    <!-- Dynamic suggestions go here -->
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <div class="nav-item login-dropdown-container">
+                    <button class="login-btn" id="login-btn">Login</button>
+                    <!-- Login Dropdown -->
+                    <div class="dropdown-menu login-menu">
+                        <div class="menu-arrow"></div>
+                        <a href="#"><i class="fa-solid fa-circle-user"></i> My Profile</a>
+                        <a href="#"><i class="fa-solid fa-bolt"></i> Flipkart Plus Zone</a>
+                        <a href="#" onclick="app.navigateTo('cart')"><i class="fa-solid fa-box-open"></i> Orders</a>
+                        <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
+                        <a href="#"><i class="fa-solid fa-ticket"></i> Rewards</a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-item nav-link hide-mobile">Become a Seller</a>
+
+                <!-- Notification Bell with Dropdown -->
+                <div class="nav-item notification-container">
+                    <div class="bell-icon-wrapper" onclick="app.toggleNotifications()">
+                        <i class="fa-solid fa-bell header-bell-icon"></i>
+                        <span class="bell-badge" id="bell-badge">3</span>
+                    </div>
+                    <div id="notification-dropdown" class="dropdown-menu notification-menu hidden">
+                        <div class="menu-arrow"></div>
+                        <h4 class="notif-title">Notifications</h4>
+                        <a href="#"><i class="fa-solid fa-tag"></i> <span><strong>SBI Cards Offer:</strong> Extra 10% instant discount on orders above ₹5000!</span></a>
+                        <a href="#"><i class="fa-solid fa-circle-check"></i> <span><strong>Order Dispatched:</strong> Your order has been dispatched from Delhi Hub.</span></a>
+                        <a href="#"><i class="fa-solid fa-wallet"></i> <span><strong>SuperCoins Credited:</strong> 50 SuperCoins added for shopping.</span></a>
+                    </div>
+                </div>
+
+                <div class="nav-item more-dropdown-container hide-mobile">
+                    <span class="nav-link">More <i class="fa-solid fa-angle-down arrow-icon"></i></span>
+                    <!-- More Dropdown -->
+                    <div class="dropdown-menu more-menu">
+                        <div class="menu-arrow"></div>
+                        <a href="#"><i class="fa-solid fa-bell"></i> Notification Preferences</a>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> 24x7 Customer Care</a>
+                        <a href="#"><i class="fa-solid fa-arrow-trend-up"></i> Advertise</a>
+                        <a href="#"><i class="fa-solid fa-download"></i> Download App</a>
+                    </div>
+                </div>
+
+                <div class="nav-item cart-container" onclick="app.navigateTo('cart')">
+                    <div class="cart-icon-wrapper">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </div>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CLASSIC CATEGORY BAR -->
+    <nav class="category-nav" id="flipkart-categories">
+        <div class="category-container">
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/29327f40e3c4d26b.png" alt="Grocery">
+                <span>Grocery</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('mobile')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/22fdd1b4c376149d.png" alt="Mobiles">
+                <span>Mobiles</span>
+            </div>
+            <div class="category-item dropdown-trigger" onclick="app.filterByCategory('fashion')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/c12afc017e6b24cb.png" alt="Fashion">
+                <span>Fashion <i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <div class="category-item dropdown-trigger" onclick="app.filterByCategory('electronics')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/69c758323bd94b9e.png" alt="Electronics">
+                <span>Electronics <i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <div class="category-item dropdown-trigger" onclick="app.filterByCategory('home')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/ab7e2c0215b394e3.png" alt="Home & Furniture">
+                <span>Home & Furniture <i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('appliances')">
+                <img src="https://rukminim1.flixcart.com/bg/128/128/surface1.png" alt="Appliances">
+                <span>Appliances</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('travel')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/71050627a56b4693.png" alt="Travel">
+                <span>Travel</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('beauty_toys')">
+                <img src="https://rukminim1.flixcart.com/flap/128/128/image/dff3f7adcf3a90c6.png" alt="Beauty, Toys & More">
+                <span>Beauty, Toys & More</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MINUTES CATEGORY BAR (HIDDEN BY DEFAULT) -->
+    <nav class="category-nav hidden" id="minutes-categories">
+        <div class="category-container">
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/vegetable/y/a/r/-original-imagzhyfg.jpeg" alt="Fruits & Veggies" style="border-radius:50%">
+                <span>Vegetables</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/milk/k/k/y/-original-imagzhyfg.jpeg" alt="Dairy & Bread" style="border-radius:50%">
+                <span>Dairy & Bread</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/chips/c/c/r/-original-imagzhyfg.jpeg" alt="Munchies" style="border-radius:50%">
+                <span>Munchies</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/juice/j/u/i/-original-imagzhyfg.jpeg" alt="Cold Drinks" style="border-radius:50%">
+                <span>Drinks & Juices</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/noodle/n/o/o/-original-imagzhyfg.jpeg" alt="Instant Food" style="border-radius:50%">
+                <span>Instant Food</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/biscuit/b/i/s/-original-imagzhyfg.jpeg" alt="Biscuits" style="border-radius:50%">
+                <span>Sweet Craving</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/shampoo/s/h/a/-original-imagzhyfg.jpeg" alt="Personal Care" style="border-radius:50%">
+                <span>Bath & Body</span>
+            </div>
+            <div class="category-item" onclick="app.filterByCategory('grocery')">
+                <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/detergent/d/e/t/-original-imagzhyfg.jpeg" alt="Cleaning" style="border-radius:50%">
+                <span>Cleaning Home</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- LOCATION INPUT DIALOG POPUP -->
+    <div id="location-dialog" class="location-dialog hidden">
+        <div class="location-dialog-content">
+            <h3>Choose Delivery Location</h3>
+            <p>Select pincode to view correct delivery time & stock levels.</p>
+            <div class="pincode-input-row">
+                <input type="text" id="dialog-pincode-input" placeholder="Enter 6-digit Pincode" maxlength="6">
+                <button onclick="app.applyNewLocation()">Apply</button>
+            </div>
+            <div class="divider-text">OR</div>
+            <button class="current-location-btn" onclick="app.detectCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i> Use My Current Location</button>
+            <button class="close-dialog-btn" onclick="app.toggleLocationPopup()">Cancel</button>
+        </div>
     </div>
 
-    <div class="footer">
-        <b>निवेदक -</b> समस्त ग्रामवासी, क्षेत्रवासी एवं मित्रगण
-    </div>
-</div>
+    <!-- MAIN BODY CONTAINER -->
+    <main class="main-content-area">
 
+        <!-- VIEW: HOME -->
+        <section id="home-view" class="view-section active">
+            <!-- Carousel Banner -->
+            <div class="carousel-container">
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <!-- Banners loaded dynamically -->
+                </div>
+                <button class="carousel-btn prev-btn" onclick="app.prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn" onclick="app.nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="carousel-dots">
+                    <!-- Dots loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- FLIPKART HOME (CLASSIC MODE) -->
+            <div id="flipkart-home-shelves">
+                <!-- Offers Section 1: Electronics -->
+                <div class="product-shelf">
+                    <div class="shelf-header">
+                        <div>
+                            <h2>Best of Electronics</h2>
+                            <p>Devices, Gadgets & Accessories</p>
+                        </div>
+                        <button class="view-all-btn" onclick="app.filterByCategory('electronics')">VIEW ALL</button>
+                    </div>
+                    <div class="shelf-products-slider" id="electronics-shelf">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Promotional Banner Grid -->
+                <div class="promo-grid">
+                    <div class="promo-card" onclick="app.filterByCategory('mobile')">
+                        <img src="https://rukminim1.flixcart.com/flap/960/960/image/2b347b7de9c02ff4.jpg" alt="Mobiles Offer">
+                    </div>
+                    <div class="promo-card" onclick="app.filterByCategory('electronics')">
+                        <img src="https://rukminim1.flixcart.com/flap/960/960/image/b8004f14e7a60216.jpg" alt="Laptops Offer">
+                    </div>
+                    <div class="promo-card" onclick="app.filterByCategory('fashion')">
+                        <img src="https://rukminim1.flixcart.com/flap/960/960/image/c897f1f94d93d1fc.jpg" alt="Fashion Offer">
+                    </div>
+                </div>
+
+                <!-- Offers Section 2: Mobiles -->
+                <div class="product-shelf">
+                    <div class="shelf-header">
+                        <div>
+                            <h2>Top Offers on Mobiles</h2>
+                            <p>Latest Smartphones at Best Prices</p>
+                        </div>
+                        <button class="view-all-btn" onclick="app.filterByCategory('mobile')">VIEW ALL</button>
+                    </div>
+                    <div class="shelf-products-slider" id="mobiles-shelf">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Offers Section 3: Fashion -->
+                <div class="product-shelf">
+                    <div class="shelf-header">
+                        <div>
+                            <h2>Fashion Best Deals</h2>
+                            <p>Clothing, Footwear & Accessories</p>
+                        </div>
+                        <button class="view-all-btn" onclick="app.filterByCategory('fashion')">VIEW ALL</button>
+                    </div>
+                    <div class="shelf-products-slider" id="fashion-shelf">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINUTES HOME (QUICK COMMERCE MODE) -->
+            <div id="minutes-home-shelves" class="hidden">
+                <!-- Offers Section 1: Super Minutes Deals -->
+                <div class="product-shelf">
+                    <div class="shelf-header">
+                        <div>
+                            <h2>10-15 Min Super Deals</h2>
+                            <p>Fresh Food, Breakfast & Kitchen Essentials</p>
+                        </div>
+                        <button class="view-all-btn" onclick="app.filterByCategory('grocery')">VIEW ALL</button>
+                    </div>
+                    <div class="shelf-products-slider" id="minutes-deals-shelf">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Promotional Banners Minutes -->
+                <div class="promo-grid">
+                    <div class="promo-card" onclick="app.filterByCategory('grocery')">
+                        <img src="https://rukminim2.flixcart.com/fk-p-linchpin-web/1000/280/image/dfcb93d39589d984.jpg" alt="Grocery Deal 1" style="height:100%; object-fit:cover">
+                    </div>
+                    <div class="promo-card" onclick="app.filterByCategory('grocery')">
+                        <img src="https://rukminim2.flixcart.com/fk-p-linchpin-web/1000/280/image/cc1db39fb3993d0c.jpg" alt="Grocery Deal 2" style="height:100%; object-fit:cover">
+                    </div>
+                    <div class="promo-card" onclick="app.filterByCategory('grocery')">
+                        <img src="https://rukminim2.flixcart.com/fk-p-linchpin-web/1000/280/image/d94943fcfd43d3b7.jpg" alt="Grocery Deal 3" style="height:100%; object-fit:cover">
+                    </div>
+                </div>
+
+                <!-- Offers Section 2: Munchies & Drinks -->
+                <div class="product-shelf">
+                    <div class="shelf-header">
+                        <div>
+                            <h2>Chips, Cold Drinks & Snacks</h2>
+                            <p>Instant Cravings Delivered Fast</p>
+                        </div>
+                        <button class="view-all-btn" onclick="app.filterByCategory('grocery')">VIEW ALL</button>
+                    </div>
+                    <div class="shelf-products-slider" id="minutes-snacks-shelf">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW: SEARCH RESULTS / PRODUCT LISTING -->
+        <section id="search-view" class="view-section hidden">
+            <div class="search-layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <h3>Filters</h3>
+                    <hr>
+                    
+                    <div class="filter-group">
+                        <h4>CATEGORIES</h4>
+                        <ul>
+                            <li onclick="app.filterByCategory('all')" class="active-category-link">All Categories</li>
+                            <li onclick="app.filterByCategory('electronics')">Electronics</li>
+                            <li onclick="app.filterByCategory('mobile')">Mobiles</li>
+                            <li onclick="app.filterByCategory('fashion')">Fashion</li>
+                            <li onclick="app.filterByCategory('home')">Home & Furniture</li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>PRICE RANGE</h4>
+                        <div class="price-range-inputs">
+                            <select id="min-price-select" onchange="app.applyFilters()">
+                                <option value="0">Min</option>
+                                <option value="100">₹100</option>
+                                <option value="1000">₹1000</option>
+                                <option value="5000">₹5000</option>
+                                <option value="10000">₹10000</option>
+                                <option value="20000">₹20000</option>
+                            </select>
+                            <span class="to-text">to</span>
+                            <select id="max-price-select" onchange="app.applyFilters()">
+                                <option value="500000">Max</option>
+                                <option value="500">₹500</option>
+                                <option value="2000">₹2000</option>
+                                <option value="10000">₹10000</option>
+                                <option value="20000">₹20000</option>
+                                <option value="50000">₹50000</option>
+                                <option value="100000">₹100000+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>CUSTOMER RATING</h4>
+                        <div class="rating-filter">
+                            <label><input type="checkbox" class="rating-checkbox" value="4" onchange="app.applyFilters()"> 4★ & above</label><br>
+                            <label><input type="checkbox" class="rating-checkbox" value="3" onchange="app.applyFilters()"> 3★ & above</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>DISCOUNT</h4>
+                        <div class="discount-filter">
+                            <label><input type="radio" name="discount-filter" value="0" checked onchange="app.applyFilters()"> Any</label><br>
+                            <label><input type="radio" name="discount-filter" value="30" onchange="app.applyFilters()"> 30% or more</label><br>
+                            <label><input type="radio" name="discount-filter" value="50" onchange="app.applyFilters()"> 50% or more</label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Listing Container -->
+                <div class="results-container">
+                    <div class="sort-bar">
+                        <span id="results-count">Showing 0 results</span>
+                        <div class="sort-options">
+                            <span class="sort-label">Sort By:</span>
+                            <span class="sort-tab active" onclick="app.sortResults('relevance')">Relevance</span>
+                            <span class="sort-tab" onclick="app.sortResults('lowToHigh')">Price -- Low to High</span>
+                            <span class="sort-tab" onclick="app.sortResults('highToLow')">Price -- High to Low</span>
+                            <span class="sort-tab" onclick="app.sortResults('discount')">Newest First</span>
+                        </div>
+                    </div>
+                    <!-- Products Grid/List -->
+                    <div class="products-grid" id="search-products-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW: PRODUCT DETAIL -->
+        <section id="detail-view" class="view-section hidden">
+            <!-- Dynamic detailed content rendered here -->
+            <div class="detail-container" id="product-detail-content">
+                <!-- Javascript will load detailed layouts here -->
+            </div>
+        </section>
+
+
+        <!-- VIEW: SHOPPING CART -->
+        <section id="cart-view" class="view-section hidden">
+            <div class="cart-layout">
+                <!-- Cart Items Container -->
+                <div class="cart-left-col">
+                    <div class="cart-header-card">
+                        <span>Flipkart Cart Items</span>
+                        <span>Deliver to: <strong id="cart-delivery-pin">New Delhi - 110001</strong> <button class="change-btn" onclick="app.toggleLocationPopup()">Change</button></span>
+                    </div>
+
+                    <div id="cart-items-list">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div class="cart-actions-bar">
+                        <button class="place-order-btn" onclick="app.placeOrder()">PLACE ORDER</button>
+                    </div>
+                </div>
+
+                <!-- Billing Sidebar -->
+                <div class="cart-right-col">
+                    <div class="price-details-card">
+                        <h3>PRICE DETAILS</h3>
+                        <hr>
+                        <div class="price-row">
+                            <span>Price (<span id="billing-items-count">0</span> items)</span>
+                            <span id="billing-mrp">₹0</span>
+                        </div>
+                        <div class="price-row text-success">
+                            <span>Discount</span>
+                            <span id="billing-discount">-₹0</span>
+                        </div>
+                        <div class="price-row text-success">
+                            <span>Delivery Charges</span>
+                            <span>FREE</span>
+                        </div>
+                        <hr class="dashed-hr">
+                        <div class="price-row total-amount-row">
+                            <span>Total Amount</span>
+                            <span id="billing-total">₹0</span>
+                        </div>
+                        <hr class="dashed-hr">
+                        <div class="savings-text">
+                            You will save <strong id="billing-savings">₹0</strong> on this order
+                        </div>
+                    </div>
+                    <div class="safe-payment-notice">
+                        <i class="fa-solid fa-shield-halved"></i> Safe and Secure Payments. 100% Authentic products.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW: ORDER SUCCESS -->
+        <section id="success-view" class="view-section hidden">
+            <div class="success-card">
+                <div class="success-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h1 id="success-heading">Order Placed Successfully!</h1>
+                <p id="success-description">Thank you for shopping with us. Your order has been placed successfully.</p>
+                <div class="order-details-box">
+                    <p>Order ID: <strong id="success-order-id">FK78394029283</strong></p>
+                    <p>Estimated Delivery: <strong id="success-delivery-time">Tomorrow, by 9:00 PM</strong></p>
+                </div>
+                <button class="continue-shopping-btn" onclick="app.navigateTo('home')">Continue Shopping</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-links-container">
+            <div class="footer-column">
+                <h3>ABOUT</h3>
+                <a href="#">Contact Us</a>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Flipkart Stories</a>
+                <a href="#">Press</a>
+                <a href="#">Flipkart Wholesale</a>
+                <a href="#">Cleartrip</a>
+                <a href="#">Corporate Information</a>
+            </div>
+            <div class="footer-column">
+                <h3>HELP</h3>
+                <a href="#">Payments</a>
+                <a href="#">Shipping</a>
+                <a href="#">Cancellation & Returns</a>
+                <a href="#">FAQ</a>
+                <a href="#">Report Infringement</a>
+            </div>
+            <div class="footer-column">
+                <h3>CONSUMER POLICY</h3>
+                <a href="#">Cancellation & Returns</a>
+                <a href="#">Terms Of Use</a>
+                <a href="#">Security</a>
+                <a href="#">Privacy</a>
+                <a href="#">Sitemap</a>
+                <a href="#">Grievance Redressal</a>
+                <a href="#">EPR Compliance</a>
+            </div>
+            <div class="footer-column border-left">
+                <h3>Mail Us:</h3>
+                <p>Flipkart Internet Private Limited,</p>
+                <p>Buildings Alyssa, Begonia &</p>
+                <p>Clove Embassy Tech Village,</p>
+                <p>Outer Ring Road, Devarabeesanahalli Village,</p>
+                <p>Bengaluru, 560103,</p>
+                <p>Karnataka, India</p>
+            </div>
+            <div class="footer-column">
+                <h3>Registered Office Address:</h3>
+                <p>Flipkart Internet Private Limited,</p>
+                <p>Buildings Alyssa, Begonia &</p>
+                <p>Clove Embassy Tech Village,</p>
+                <p>Outer Ring Road, Devarabeesanahalli Village,</p>
+                <p>Bengaluru, 560103,</p>
+                <p>Karnataka, India</p>
+                <p>CIN : U51109KA2012PTC066107</p>
+                <p>Telephone: <a href="tel:044-45614700" class="tel-link">044-45614700</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom-bar">
+            <div class="bottom-link"><i class="fa-solid fa-briefcase"></i> <span>Become a Seller</span></div>
+            <div class="bottom-link"><i class="fa-solid fa-star"></i> <span>Advertise</span></div>
+            <div class="bottom-link"><i class="fa-solid fa-gift"></i> <span>Gift Cards</span></div>
+            <div class="bottom-link"><i class="fa-solid fa-circle-question"></i> <span>Help Center</span></div>
+            <div class="copyright">© 2007-2026 Flipkart.com</div>
+            <div class="payment-cards">
+                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="Payment Logos">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
 </body>
 </html>
